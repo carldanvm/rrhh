@@ -7,6 +7,5 @@
 </head>
 <body>
     <h1>Pagina de ejemplo para probar el index</h1>
-    
 </body>
 </html>

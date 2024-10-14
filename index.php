@@ -12,7 +12,6 @@
                 echo "<h1>Error 404</h1>";
                 break;
         }
-
     }else{
         echo "<h1>Error 404</h1>";
     }

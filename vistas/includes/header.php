@@ -8,3 +8,4 @@
 </head>
 
 <body>
+    <h1 style="background-color: lightblue; padding: 20px">Sistema de recursos humanos</h1>

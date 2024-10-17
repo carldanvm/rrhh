@@ -1,5 +1,5 @@
 <?php include 'includes/header.php'; ?>
 
-<h1>Pagina de ejemplo para probar el index</h1>
+<h2>Pagina inicial</h2>
 
 <?php include 'includes/footer.php'; ?>

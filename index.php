@@ -15,6 +15,6 @@
         }
         
     }else{
-        include 'inicio.php';
+        include 'vistas/inicio.php';
     }
 ?>

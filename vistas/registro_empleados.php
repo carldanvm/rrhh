@@ -4,8 +4,6 @@
     <hr>
     <h4>Ingrese todos los datos personales necesarios para realizar el registro de un nuevo empleado</h4>
     
-    <?php session_start(); ?>
-
     <form action="index.php?page=registro_empleados" method="post">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br><br>

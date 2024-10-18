@@ -1,8 +1,6 @@
 <?php
 include 'includes/header.php';
 
-session_start();
-
 include 'backend/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['siguiente'])) {
@@ -15,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['siguiente'])) {
 }
 ?>
 
-<h1 style="background-color: lightblue; padding: 20px">Registro de nuevo empleado</h1>
+<h1>Registro de nuevo empleado</h1>
+<hr>
 <h4>Ingrese toda la informacion del cargo del nuevo empleado</h4>
 
 <form action="index.php?page=registro_cargos" method="post">
@@ -56,12 +55,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
 
     if (mysqli_query($conn, $sql)) {    //Esto es para verificar que se guardo todo bien
         echo "<h3>Datos guardados correctamente</h3>";
+        header("refresh:2; url=index.php?page=panel_rrhh");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
     mysqli_close($conn);
-    session_destroy();
+
+    unset($_SESSION["estado"]);
+    unset($_SESSION["municipio"]);
+    unset($_SESSION["ciudad"]);
+    unset($_SESSION["calle"]);
+    unset($_SESSION["zip"]);
+    unset($_SESSION["vivienda"]);
+    unset($_SESSION['usuario_id']);
+
 }
 
 ?>

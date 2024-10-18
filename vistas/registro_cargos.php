@@ -1,8 +1,6 @@
 <?php
 include 'includes/header.php';
 
-session_start();
-
 include 'backend/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['siguiente'])) {
@@ -64,7 +62,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
     }
 
     mysqli_close($conn);
-    session_destroy();
+
+    unset($_SESSION["estado"]);
+    unset($_SESSION["municipio"]);
+    unset($_SESSION["ciudad"]);
+    unset($_SESSION["calle"]);
+    unset($_SESSION["zip"]);
+    unset($_SESSION["vivienda"]);
+    unset($_SESSION['usuario_id']);
+
 }
 
 ?>

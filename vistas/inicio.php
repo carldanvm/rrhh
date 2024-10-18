@@ -1,5 +1,5 @@
-<?php include 'includes/header.php'; ?>
+<?php include 'includes/header.php';?>
 
-<h2>Pagina inicial</h2>
+<h2>Registrar su entrada/salida</h2>
 
 <?php include 'includes/footer.php'; ?>

@@ -1,13 +1,7 @@
 <?php include "includes/header.php"; ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registro empleados</title>
-</head>
-
-<body>
-    <h1 style="background-color: lightblue; padding: 20px">Registro de nuevo empleado</h1>
+    <h1>Registro de nuevo empleado</h1>
+    <hr>
     <h4>Ingrese todos los datos personales necesarios para realizar el registro de un nuevo empleado</h4>
     
     <?php session_start(); ?>
@@ -36,7 +30,8 @@
     </form>
 
     <?php
-        include 'probar-bd.php';
+
+        include 'backend/db.php';
 
         if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['siguiente'])) {    
             $nombre = $_POST["nombre"];
@@ -62,5 +57,5 @@
         }
     ?>
 
-</body>
-</html>
+
+<?php include "includes/footer.php"; ?>

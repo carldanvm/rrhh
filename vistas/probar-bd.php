@@ -1,13 +1,7 @@
-<?php include 'includes/header.php'; ?>
-
 <?php 
-    include 'backend/db.php';
+    include 'C:\wamp64\www\rrhh/backend/db.php';
 
-    if ($conn) {
-        echo "<h1>Conexión exitosa</h1>";
-    } else{
+    if (!$conn) {
         echo "<h1>Error de conexión</h1>";
     }
 ?>
-
-<?php include 'includes/footer.php'; ?>

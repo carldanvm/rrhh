@@ -16,6 +16,18 @@
                 include 'vistas/login.php';
                 break;
 
+            case 'registro_empleados':
+                include 'vistas/registro_empleados.php';
+                break;
+            
+            case 'registro_direccion':
+                include 'vistas/registro_direccion.php';
+                break;
+
+            case 'registro_cargos':
+                include 'vistas/registro_cargos.php';
+                break;
+
             default:
                 echo "<h1>Error 404</h1>";
                 break;

@@ -38,7 +38,12 @@
 
         <div class="menu-navegacion">
             <a href="index.php?page=inicio">Inicio</a> /
-            <a href="index.php?page=login">Iniciar sesión</a> /
-            <a href="index.php?page=logout">Cerrar sesión</a> /
+            <a href="index.php?page=login">Iniciar sesión</a>
+            <?php
+            /* No mostrar la opcion de cerrar sesion si no se inicio sesion */
+            if (isset($_SESSION['logeado_id'])) {
+                echo '/ <a href="index.php?page=logout">Cerrar sesión</a>'; 
+            }
+            ?>
         </div>
     </div>

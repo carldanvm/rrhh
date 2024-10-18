@@ -8,4 +8,13 @@
 </head>
 
 <body>
-    <h1 style="background-color: lightblue; padding: 20px">Sistema de recursos humanos</h1>
+    <div style="background-color: lightblue; padding: 5px">
+        <h1 >Sistema de recursos humanos</h1>
+
+        <div class="menu-navegacion">
+            <a href="index.php?page=inicio">Inicio</a> /
+            <a href="index.php?page=login">Login</a> /
+            <a href="index.php?page=registro_empleados">Registro empleados</a>
+        </div>
+    </div>
+

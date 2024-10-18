@@ -15,7 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['siguiente'])) {
 }
 ?>
 
-<h1 style="background-color: lightblue; padding: 20px">Registro de nuevo empleado</h1>
+<hr>
+<h2 style="background-color: lightgray; padding: 10px">Registro de nuevo empleado</h2>
+<hr>
 <h4>Ingrese toda la informacion del cargo del nuevo empleado</h4>
 
 <form action="index.php?page=registro_cargos" method="post">
@@ -55,7 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
 
 
     if (mysqli_query($conn, $sql)) {    //Esto es para verificar que se guardo todo bien
-        echo "<h3>Datos guardados correctamente</h3>";
+        echo "<br><h3>Datos guardados correctamente!!!</h3>";
+        header("refresh:5; url=index.php?page=inicio");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

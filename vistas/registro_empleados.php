@@ -1,6 +1,7 @@
 <?php include "includes/header.php"; ?>
 
-    <h1>Registro de nuevo empleado</h1>
+    <hr>
+    <h2 style="background-color: lightgray; padding: 10px">Registro de nuevo empleado</h2>
     <hr>
     <h4>Ingrese todos los datos personales necesarios para realizar el registro de un nuevo empleado</h4>
     
@@ -26,7 +27,7 @@
         <input type="date" id="fecha_ingreso" name="fecha_ingreso" required><br><br>
 
         <input type="submit" name="siguiente" value="Siguiente"><br><br>
-        <button type="button" onclick="window.location.href='index.php?page=inicio'">Cancelar</button>
+        <button type="button" onclick="window.location.href='index.php?page=inicio'">Cancelar registro</button>
     </form>
 
     <?php
@@ -48,7 +49,7 @@
             $_SESSION['usuario_id'] = mysqli_insert_id($conn);
 
             if($result) {   
-                echo "Registro exitoso, siguiente paso es registrar la direccion del nuevo usuario";
+                echo "<br><h5>Registrando informacion... continue con el registro la direccion del nuevo empleado</h5>";
                 header("refresh:2; url=index.php?page=registro_direccion");
             } else {
                 echo "Error al registrar al nuevo empleado";

@@ -1,6 +1,7 @@
 <?php include "includes/header.php"; ?>
 
-<h1>Registro de nuevo empleado</h1>
+<hr>
+<h2 style="background-color: lightgray; padding: 10px">Registro de nuevo empleado</h2>
 <hr>
 <h4>Ingrese todos los datos de direccion del nuevo empleado</h4>
 
@@ -24,7 +25,7 @@
     <input type="text" id="vivienda" name="vivienda" required><br><br>
 
     <input type="submit" name="siguiente" value="Siguiente"><br><br>
-    <button type="button" onclick="window.location.href='index.php?page=inicio';">Cancelar</button>
+    <button type="button" onclick="window.location.href='index.php?page=inicio';">Cancelar registro</button>
 </form>
 
 

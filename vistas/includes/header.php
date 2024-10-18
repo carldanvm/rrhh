@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RRHH</title>
+
+    <style>
+        h1 {
+            margin: 10px 0;
+        }
+        h2 {
+            margin: 5px 0;
+        }
+        hr {
+            margin: 0;
+            padding: 0; 
+            border: none;
+            border-top: 2px solid #000;
+        }
+    </style>
 </head>
 
 <body>

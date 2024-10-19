@@ -20,13 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['siguiente'])) {
 
 <form action="index.php?page=registro_cargos" method="post">
     <label for="cargo">Cargo:</label>
-    <input type="text" id="cargo" name="cargo" required><br><br>
+    <input type="text" id="cargo" name="cargo" 
+    required pattern="^[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" 
+    title="El cargo no puede estar vacio o en blanco"><br><br>
 
     <label for="area">Area de trabajo:</label>
-    <input type="text" id="area" name="area" required><br><br>
+    <input type="text" id="area" name="area"
+    required pattern="^[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" 
+    title="El area de trabajo no puede estar vacio o en blanco"><br><br>
 
     <label for="salario_base">Salario base:</label>
-    <input type="text" id="salario_base" name="salario_base" required><br><br>
+    <input type="text" id="salario_base" name="salario_base" 
+    required pattern="\d+" maxlength="6" 
+    title="El salario base debe contener solo numeros, sin puntos y sin espacios en blanco"><br><br>
 
     <input type="submit" name="registrar" value="Registrar usuario"><br><br>
     <button type="button" onclick="window.location.href='index.php?page=inicio'">Cancelar</button>
@@ -56,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
 
     if (mysqli_query($conn, $sql)) {    //Esto es para verificar que se guardo todo bien
         echo "<br><h3>Datos guardados correctamente!!!</h3>";
-        header("refresh:5; url=index.php?page=inicio");
+        header("refresh:3; url=index.php?page=panel_rrhh");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

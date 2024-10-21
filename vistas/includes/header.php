@@ -52,10 +52,14 @@
         <br>
 
         <div class="menu-navegacion">
-            <a href="index.php?page=inicio">Inicio</a> /
-            <a href="index.php?page=login">Iniciar sesión</a>
+            <a href="index.php?page=inicio">Inicio</a>
             <?php
-            /* No mostrar la opcion de cerrar sesion si no se inicio sesion */
+            /* Si no esta logeado mostrar el link de iniciar sesion */
+            if (!isset($_SESSION['logeado_id'])) {
+                echo '/ <a href="index.php?page=login">Iniciar sesión</a>';
+            };
+
+            /* Mostrar el link de cerrar sesion solo si la sesion fue iniciada */
             if (isset($_SESSION['logeado_id'])) {
                 echo '/ <a href="index.php?page=logout">Cerrar sesión</a>'; 
             }

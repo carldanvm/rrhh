@@ -1,0 +1,2 @@
+-Validar si la cedula o el email ya existen en la base de datos antes de intentar registrar uno nuevo,
+esta dando error porque en la base de dato se especifica que es un dato unico

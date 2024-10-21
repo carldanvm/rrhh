@@ -44,22 +44,13 @@ if (isset($_GET["page"])) {
             }
             break;
 
-        case 'registro_direccion':
+        case 'registrar':
             if (isset($_SESSION['logeado_id'])) {
-                include 'vistas/registro_direccion.php';
+                include 'backend/registrar.php';
             } else {
                 header("location: index.php?page=login");
                 exit();
-            }
-            break;
-
-        case 'registro_cargos':
-            if (isset($_SESSION['logeado_id'])) {
-                include 'vistas/registro_cargos.php';
-            } else {
-                header("location: index.php?page=login");
-                exit();
-            }
+            };
             break;
 
         case 'panel_rrhh':

@@ -1,2 +1,6 @@
 -Validar si la cedula o el email ya existen en la base de datos antes de intentar registrar uno nuevo,
 esta dando error porque en la base de dato se especifica que es un dato unico
+
+-Evitar que el usuario entre al formulario de login, si ya esta logeado, redireccionar al panel
+
+-Añadir tipo de usuario en la base de datos (normal, rrhh), solo los de tipo rrhh podran logear y añadir empleados

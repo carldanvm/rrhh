@@ -37,6 +37,10 @@
     <input type="date" id="fecha_ingreso" name="fecha_ingreso" required
         value="<?php echo isset($_POST['fecha_ingreso']) ? htmlspecialchars($_POST['fecha_ingreso']) : ''; ?>"><br><br>
 
+    <hr>
+
+    <h4>Datos de la dirección</h4>
+
     <label for="estado">Estado:</label>
     <input type="text" id="estado" name="estado"
         required pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$"
@@ -66,6 +70,10 @@
     <input type="text" id="vivienda" name="vivienda"
         required pattern="^[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$"
         title="La referencia no puede estar vacio o en blanco"><br><br>
+
+    <hr>
+
+    <h4>Datos del cargo</h4>
 
     <label for="cargo">Cargo:</label>
     <input type="text" id="cargo" name="cargo"

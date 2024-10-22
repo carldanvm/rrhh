@@ -19,6 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
     $area = $_POST["area"];
     $salario_base = $_POST["salario_base"];
 
+    // Guardar todos los datos del post en una variable de sesion
+    $_SESSION['datos_form'] = $_POST;
+
     $dominios_validos = ['gmail.com', 'outlook.com', 'hotmail.com'];
 
     // verificamos el dominio del correo
@@ -27,67 +30,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
 
         if (in_array($dominio, $dominios_validos)) {
 
-            //si el correo es valido, verificamos si la cedula existe en la BD
+            //Verificamos si ya existe un usuario con esa cedula o con ese email
             $sql = "SELECT * FROM usuarios WHERE cedula = '$cedula'";
-            $result = mysqli_query($conn, $sql);
+            $resultCedula = mysqli_query($conn, $sql);
 
-            if (mysqli_num_rows($result) > 0) {
-                echo "Ya existe un usuario con esa cedula. Por favor, ingresa otra cedula.";
-                header("refresh: 3; location: index.php?page=registro_empleados");
+            $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+            $resultEmail = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($resultCedula) > 0) {
+                $_SESSION['error'] = "Ya existe un usuario con esa cedula.";
+                header("location: index.php?page=registro_empleados");
                 exit();
-            } else {
+            }
 
-                // Guarda el nuevo usuario en la base de datos
-                $sql = "INSERT INTO usuarios (nombre, apellido, cedula, email, password, fecha_ingreso) VALUES ('$nombre', '$apellido', '$cedula', '$email', '$password', '$fecha_ingreso')";
+            if (mysqli_num_rows($resultEmail) > 0) {
+                $_SESSION['error'] = "Ya existe un usuario con ese email.";
+                header("location: index.php?page=registro_empleados");
+                exit();
+            }
 
-                $resultado = mysqli_query($conn, $sql);
+            // Guarda el nuevo usuario en la base de datos
+            $sql = "INSERT INTO usuarios (nombre, apellido, cedula, email, password, fecha_ingreso) VALUES ('$nombre', '$apellido', '$cedula', '$email', '$password', '$fecha_ingreso')";
 
-                if (!$resultado){
-                    echo mysqli_error($conn) . "<br>". "<br>" ;
-                    exit('Error al registrar el usuario');
-                }
+            $resultado = mysqli_query($conn, $sql);
 
-
-                // Obtiene el ID del nuevo usuario
-                $id = mysqli_insert_id($conn);
-
-
-                // Guarda la nueva direccion en la base de datos
-                $sql = "INSERT INTO direccion (usuario_id, estado, municipio, ciudad, calle, zip, vivienda) VALUES ('$id', '$estado', '$municipio', '$ciudad', '$calle', '$zip', '$vivienda')";
-
-                $resultado = mysqli_query($conn, $sql);
-
-                if (!$resultado){
-                    echo mysqli_error($conn) . "<br>". "<br>";
-                    exit('Error al registrar la direccion');
-                }
+            if (!$resultado) {
+                $_SESSION['error'] = "Error al registrar el usuario en la base de datos";
+                header("location: index.php?page=registro_empleados");
+                exit();
+            }
 
 
-                // Guarda la informacion del cargo en la base de datos
-                $sql = "INSERT INTO cargos (usuario_id, cargo, area, salario_base) VALUES ('$id', '$cargo', '$area', '$salario_base')";
+            // Obtiene el ID del nuevo usuario
+            $id = mysqli_insert_id($conn);
 
-                $resultado = mysqli_query($conn, $sql);
 
-                if (!$resultado){
-                    echo mysqli_error($conn) . "<br>". "<br>";
-                    exit('Error al registrar el cargo');
-                }
+            // Guarda la nueva direccion en la base de datos
+            $sql = "INSERT INTO direccion (usuario_id, estado, municipio, ciudad, calle, zip, vivienda) VALUES ('$id', '$estado', '$municipio', '$ciudad', '$calle', '$zip', '$vivienda')";
 
-                // Redireccionar al panel_rrhh
-                $_SESSION['mensaje'] = "Usuario registrado exitosamente";
-                header("location: index.php?page=panel_rrhh");
-            } 
+            $resultado = mysqli_query($conn, $sql);
+
+            if (!$resultado) {
+                $_SESSION['error'] = "Error al registrar la nueva direccion en la base de datos";
+                header("location: index.php?page=registro_empleados");
+                exit();
+            }
+
+
+            // Guarda la informacion del cargo en la base de datos
+            $sql = "INSERT INTO cargos (usuario_id, cargo, area, salario_base) VALUES ('$id', '$cargo', '$area', '$salario_base')";
+
+            $resultado = mysqli_query($conn, $sql);
+
+            if (!$resultado) {
+                $_SESSION['error'] = "Error al registrar la informacion del cargo en la base de datos";
+                header("location: index.php?page=registro_empleados");
+                exit();
+            }
+
+            // Redireccionar al panel_rrhh con un mensaje de exito y vaciar la variable de sesion datos_form
+            $_SESSION['mensaje'] = "Usuario registrado exitosamente";
+            unset($_SESSION['datos_form']);
+            header("location: index.php?page=panel_rrhh");
 
         } else {
-            echo "El dominio del correo no está permitido.";
+            $_SESSION['error'] = "Dominio de correo no permitido.";
             header("location: index.php?page=registro_empleados");
+            exit();
         }
-
     } else {
-        echo "Formato de correo inválido.";
+        $_SESSION['error'] = "Formato de correo no permitido.";
         header("location: index.php?page=registro_empleados");
+        exit();
     }
-
 }
-
-?>

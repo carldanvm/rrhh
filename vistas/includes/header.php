@@ -54,6 +54,9 @@
         <div class="menu-navegacion">
             <a href="index.php?page=inicio">Inicio</a>
             <?php
+            if (isset($_SESSION['logeado_id'])) {
+                echo '/ <a href="index.php?page=panel_rrhh">Panel RRHH</a>';
+            }
             /* Si no esta logeado mostrar el link de iniciar sesion */
             if (!isset($_SESSION['logeado_id'])) {
                 echo '/ <a href="index.php?page=login">Iniciar sesión</a>';

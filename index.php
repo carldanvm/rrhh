@@ -55,6 +55,7 @@ if (isset($_GET["page"])) {
 
         case 'panel_rrhh':
             if (isset($_SESSION['logeado_id'])) {
+                unset($_SESSION['datos_form']);
                 include 'vistas/panel_rrhh.php';
             } else {
                 header("location: index.php?page=login");

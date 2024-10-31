@@ -4,6 +4,8 @@
 
 -añadir el input para seleccionar tipo de usuario al registrar un usuario
 
+-añadir input para numero de telefono
+
 -añadir boton para ir al panel de rrhh cuando un usuario de rrhh esta logeado
 
 -mostrar tabla con informacion de los usuarios en el panel rrhh

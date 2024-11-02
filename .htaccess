@@ -1,3 +1,22 @@
+# Permite enlaces simbólicos en el servidor
 Options +FollowSymLinks
+
+# Activa el sistema de reescritura de URLs de Apache
 RewriteEngine On
-RewriteRule ^(.*)$ index.php [L]
+
+# Define la carpeta base para las reglas de reescritura
+RewriteBase /rrhh/
+
+# Permite acceso directo a archivos css, js, imágenes, etc
+RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|php)$ - [L]
+
+# Desactiva la visualización del contenido de carpetas
+Options -Indexes
+
+
+# Si alguien accede a index.php en un subdirectorio, redirige a la raíz
+RewriteCond %{THE_REQUEST} /rrhh/(.+)/index\.php [NC]
+RewriteRule ^ /rrhh/index.php [L,R=301,QSA]
+
+# Redirige todas las demás peticiones al archivo index.php principal
+RewriteRule ^(.*)$ index.php [L,QSA]

@@ -6,23 +6,34 @@
         $cedula = $_POST['cedula'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM usuarios WHERE cedula = '$cedula' AND password = '$password'";
+        $sql = "SELECT * FROM usuarios WHERE cedula = $cedula";
         $result = mysqli_query($conn, $sql);
+        $fila = mysqli_fetch_assoc($result);
 
-        // Revisar si el usuario existe para redirecionar al panel de RRHH
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $_SESSION['logeado_id'] = $row['id'];
-            $_SESSION['logeado_nombre'] = $row['nombre'];
-            $_SESSION['logeado_apellido'] = $row['apellido'];
-            $_SESSION['logeado_cedula'] = $row['cedula'];
-            $_SESSION['logeado_email'] = $row['email'];
-
-            header("location: index.php?page=panel_rrhh");
-            exit();
-        }else{
+        // Revisar si la cedula existe
+        if (mysqli_num_rows($result) == 0) {
+            $_SESSION['error'] = "La cedula no esta registrada";
             header("location: index.php?page=login");
             exit();
         }
+
+        if ($fila['password'] != $password) {
+            $_SESSION['error'] = "La contraseña es incorrecta";
+            header("location: index.php?page=login");
+            exit();
+        }
+
+        if ($fila['password'] == $password) {
+            
+            $_SESSION['logeado_id'] = $fila['id'];
+            $_SESSION['logeado_nombre'] = $fila['nombre'];
+            $_SESSION['logeado_apellido'] = $fila['apellido'];
+            $_SESSION['logeado_cedula'] = $fila['cedula'];
+            $_SESSION['logeado_email'] = $fila['email'];
+
+            header("location: index.php?page=panel_rrhh");
+            exit();
+        }
+
     }
 ?>

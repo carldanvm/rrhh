@@ -1,0 +1,104 @@
+#tabla-empleados th {
+  border-bottom: 1px solid #000;
+  background-color: lightsteelblue;
+  padding: 10px;
+  padding-inline: 20px;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+#tabla-empleados td {
+  padding-block: 7px;
+  padding-inline: 20px;
+  border: 1px solid #000;
+}
+
+#tabla-empleados tr:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.encabezado {
+  background-color: lightblue;
+  padding-block: 15px;
+  padding-inline: 30px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.menu-navegacion {
+  display: flex;
+  gap: 15px;
+}
+
+.boton-nav {
+  color: gray;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.boton-nav:hover {
+  opacity: 1;
+  color: black;
+}
+
+.contenedor {
+  padding-inline: 30px;
+  padding-block: 20px;
+}
+
+.registro-horas-contenedor{
+    padding-inline: 20px;
+}
+
+.registro-horas-formulario{
+    box-shadow: 0px 0px 5px 0px gray;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+#formulario-registro-horas{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    padding-inline: 90px;
+}
+
+#confirmar-registro{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    padding-inline: 70px;
+}
+
+.boton-confirmar{
+    border-radius: 7px;
+    background: var(--bs-success);
+    color: white;
+}
+
+.boton-cancelar{
+    border-radius: 7px;
+    background: var(--bs-red);
+    color: white;
+}
+
+.boton-registrar{
+    border-radius: 7px;
+    background: var(--bs-primary);
+    color: white;
+}
+
+.calendario{
+    background-image: url(../img/calendario.jpg);
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

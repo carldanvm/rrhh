@@ -1,3 +1,31 @@
+# Habilita el seguimiento de enlaces simbólicos (accesos directos) en el servidor
 Options +FollowSymLinks
+
+# Activa el motor de reescritura de URLs de Apache
 RewriteEngine On
-RewriteRule ^(.*)$ index.php [L]
+
+# Establece el directorio base para las reglas de reescritura
+# En este caso, la aplicación está en la carpeta 'rrhh'
+RewriteBase /rrhh/
+
+# Esta regla permite el acceso directo a archivos de recursos (assets)
+# Si la URL termina en cualquiera de estas extensiones, se sirve el archivo directamente
+# El guión (-) significa "no hacer nada" y [L] significa que es la última regla a procesar
+RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg)$ - [L]
+
+# Desactiva la visualización del listado de archivos en los directorios
+# Esto es una medida de seguridad para evitar que los usuarios vean el contenido de las carpetas
+Options -Indexes
+
+# Esta regla detecta cuando alguien intenta acceder a un archivo index.php en cualquier subdirectorio
+# %{THE_REQUEST} captura la petición HTTP completa
+# [NC] significa "No Case", es decir, no distingue entre mayúsculas y minúsculas
+RewriteCond %{THE_REQUEST} /rrhh/(.+)/index\.php [NC]
+# Redirige a index.php en la raíz
+# [L] = Última regla, [R=301] = Redirección permanente, [QSA] = Mantiene los parámetros de la URL
+RewriteRule ^ /rrhh/index.php [L,R=301,QSA]
+
+# Regla final que redirige todas las peticiones a index.php
+# ^(.*)$ captura cualquier URL
+# [L] = Última regla, [QSA] = Mantiene los parámetros de la URL (Query String Append)
+RewriteRule ^(.*)$ index.php [L,QSA]

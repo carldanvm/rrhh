@@ -2,7 +2,7 @@
 
 <h2>Panel de RRHH</h2>
 
-<h3>Acciones de RRHH</h3>
+<h4>Acciones de RRHH</h4>
 <a href="index.php?page=registro_empleados">Registro empleados</a>
 
 
@@ -17,4 +17,37 @@
     }
 ?>
 
+<div id="tabla-empleados-container">
+    <table id="tabla-empleados">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    Cedula
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Fecha de ingreso
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los demas registros se agregan dinamicamente con JS -->
+        </tbody>
+    </table>
+
+</div>
+
 <?php include 'includes/footer.php'; ?>
+
+<script src="js/tabla-rrhh.js"></script>

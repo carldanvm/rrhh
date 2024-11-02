@@ -1,0 +1,46 @@
+#tabla-empleados th {
+  border-bottom: 1px solid #000;
+  background-color: lightsteelblue;
+  padding: 10px;
+  padding-inline: 20px;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+#tabla-empleados td {
+  padding-block: 7px;
+  padding-inline: 20px;
+  border: 1px solid #000;
+}
+
+#tabla-empleados tr:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.encabezado {
+  background-color: lightblue;
+  padding: 5px;
+  padding-inline: 30px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.menu-navegacion {
+  display: flex;
+  gap: 15px;
+}
+
+.boton-nav {
+  color: gray;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.boton-nav:hover {
+  opacity: 1;
+  color: black;
+
+}

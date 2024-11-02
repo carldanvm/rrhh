@@ -8,26 +8,13 @@
     <link href="css/styles.css" rel="stylesheet">
     <title>RRHH</title>
 
-
-    <style>
-        h1 {
-            margin: 10px 0;
-        }
-        h2 {
-            margin: 5px 0;
-        }
-        hr {
-            margin: 0;
-            padding: 0; 
-            border: none;
-            border-top: 2px solid #000;
-        }
-    </style>
 </head>
 
 <body>
     <div class="encabezado">
-        <div><h1>Sistema de recursos humanos</h1></div>
+        <div>
+            <h1>Sistema de recursos humanos</h1>
+        </div>
 
         <div class="menu-navegacion">
             <a href="index.php?page=inicio" class="boton-nav">Inicio</a>
@@ -43,10 +30,10 @@
 
             /* Mostrar el link de cerrar sesion solo si la sesion fue iniciada */
             if (isset($_SESSION['logeado_id'])) {
-                echo '<a href="index.php?page=logout" class="boton-nav">Cerrar sesión</a>'; 
+                echo '<a href="index.php?page=logout" class="boton-nav">Cerrar sesión</a>';
             }
             ?>
         </div>
     </div>
 
-    <div class="container">
+    <div class="contenedor">

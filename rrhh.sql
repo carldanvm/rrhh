@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-10-2024 a las 14:10:39
--- Versión del servidor: 8.3.0
--- Versión de PHP: 8.0.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-11-2024 a las 00:36:18
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,15 +27,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `cargos`
 --
 
-DROP TABLE IF EXISTS `cargos`;
-CREATE TABLE IF NOT EXISTS `cargos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
+CREATE TABLE `cargos` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `cargo` varchar(30) NOT NULL,
   `area` varchar(30) NOT NULL,
-  `salario_base` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`)
+  `salario_base` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -44,18 +41,15 @@ CREATE TABLE IF NOT EXISTS `cargos` (
 -- Estructura de tabla para la tabla `direccion`
 --
 
-DROP TABLE IF EXISTS `direccion`;
-CREATE TABLE IF NOT EXISTS `direccion` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
+CREATE TABLE `direccion` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `estado` text NOT NULL,
   `municipio` text NOT NULL,
   `ciudad` text NOT NULL,
   `calle` varchar(30) NOT NULL,
-  `zip` int NOT NULL,
-  `vivienda` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`)
+  `zip` int(11) NOT NULL,
+  `vivienda` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -64,15 +58,12 @@ CREATE TABLE IF NOT EXISTS `direccion` (
 -- Estructura de tabla para la tabla `registros`
 --
 
-DROP TABLE IF EXISTS `registros`;
-CREATE TABLE IF NOT EXISTS `registros` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
-  `entrada` date NOT NULL,
-  `salida` date NOT NULL,
-  `horas_trabajadas` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`)
+CREATE TABLE `registros` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `entrada` datetime DEFAULT NULL,
+  `salida` datetime DEFAULT NULL,
+  `horas_trabajadas` decimal(10,3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -81,19 +72,76 @@ CREATE TABLE IF NOT EXISTS `registros` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
-  `cedula` int NOT NULL,
+  `cedula` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `fecha_ingreso` date NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cedula` (`cedula`),
-  UNIQUE KEY `email` (`email`)
+  `fecha_ingreso` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `registros`
+--
+ALTER TABLE `registros`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cedula` (`cedula`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `registros`
+--
+ALTER TABLE `registros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -103,19 +151,19 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Filtros para la tabla `cargos`
 --
 ALTER TABLE `cargos`
-  ADD CONSTRAINT `usuario_id_on_cargos_foreign_on_id_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `usuario_id_on_cargos_foreign_on_id_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  ADD CONSTRAINT `usuario_id_on_direccion_foreign_id_on_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `usuario_id_on_direccion_foreign_id_on_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `registros`
 --
 ALTER TABLE `registros`
-  ADD CONSTRAINT `usuario_id_of_registros_is_id_of_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `usuario_id_of_registros_is_id_of_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

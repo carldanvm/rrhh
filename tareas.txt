@@ -6,6 +6,3 @@
 
 -añadir input para numero de telefono
 
--mostrar tabla con informacion de los usuarios en el panel rrhh
-
--Añadir formulario para entrada/salida  y hacer los calculos de horas trabajadas

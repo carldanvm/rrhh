@@ -12,6 +12,7 @@
                     <input type="number" name="cedula" placeholder="Cedula">
                     <input type="text" name="password" placeholder="Clave">
                     <button type="button" onclick="comenzarRegistro()" class="boton-registrar">Registrar</button>
+                    <div id="error-registro-hora" style="color:red"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
                 </div>
             </div>
 

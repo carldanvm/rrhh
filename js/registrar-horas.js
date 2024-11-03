@@ -19,6 +19,7 @@ function comenzarRegistro() {
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText);
+            $("#error-registro-hora").text(xhr.responseJSON.error);
         }
     });
 }

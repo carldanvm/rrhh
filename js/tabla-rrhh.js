@@ -25,6 +25,7 @@ function llenarTabla(response) {
         let fila = `
             <tr>
                 <td>${empleado.id}</td>
+                <td>${empleado.tipo_usuario}</td>
                 <td>${empleado.nombre}</td>
                 <td>${empleado.apellido}</td>
                 <td>${empleado.cedula}</td>

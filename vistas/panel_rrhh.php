@@ -1,9 +1,9 @@
 <?php include "includes/header.php"; ?>
 
 <h4>Acciones de RRHH</h4>
+<hr>
 <a href="index.php?page=registro_empleados">Registro empleados</a>
-
-<br>
+<hr>
 <br>
 
 <?php
@@ -23,6 +23,9 @@
             <tr>
                 <th>
                     ID
+                </th>
+                <th>
+                    Tipo de usuario
                 </th>
                 <th>
                     Nombre

@@ -10,6 +10,13 @@
         $result = mysqli_query($conn, $sql);
         $fila = mysqli_fetch_assoc($result);
 
+        // Revisar si el usuario es de RRHH
+        if ($fila['tipo_usuario'] != 'rrhh') {
+            $_SESSION['error'] = "Empleado $fila[nombre] $fila[apellido], usted NO es de RRHH";
+            header("location: index.php?page=login");
+            exit();
+        }
+
         // Revisar si la cedula existe
         if (mysqli_num_rows($result) == 0) {
             $_SESSION['error'] = "La cedula no esta registrada";
@@ -23,7 +30,7 @@
             exit();
         }
 
-        if ($fila['password'] == $password) {
+        if ($fila['password'] == $password && $fila['tipo_usuario'] === 'rrhh') {
             
             $_SESSION['logeado_id'] = $fila['id'];
             $_SESSION['logeado_nombre'] = $fila['nombre'];

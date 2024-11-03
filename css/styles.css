@@ -102,3 +102,14 @@
     align-items: center;
     justify-content: center;
 }
+
+.grupo-form{
+  border: 1px solid black;
+  border-radius: 5px;
+  min-height: 455px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-top: 10px;
+}

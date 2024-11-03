@@ -8,6 +8,15 @@
     <link href="css/styles.css" rel="stylesheet">
     <title>RRHH</title>
 
+    <style>
+        hr {
+            margin: 5px 0;
+            padding: 0;
+            border: none;
+            border-top: 1px solid #000;
+        }
+    </style>
+
 </head>
 
 <body>

@@ -2,7 +2,7 @@
     include 'db.php';
     header("Content-Type: application/json");
 
-    $sql = "SELECT id, nombre, apellido, cedula, email, fecha_ingreso FROM usuarios";
+    $sql = "SELECT id, tipo_usuario, nombre, apellido, cedula, email, fecha_ingreso FROM usuarios";
     $result = mysqli_query($conn, $sql);
 
     $empleados = array();

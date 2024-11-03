@@ -1,12 +1,17 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
+    
+    // Datos del usuario
+    $tipo_usuario = $_POST["tipo_usuario"];
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
     $cedula = $_POST["cedula"];
     $email = $_POST["email"];
+    $telefono = $_POST["telefono"];
     $password = $_POST["password"];
     $fecha_ingreso = $_POST["fecha_ingreso"];
+
     // Datos de la direccion
     $estado = $_POST["estado"];
     $municipio = $_POST["municipio"];
@@ -14,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
     $calle = $_POST["calle"];
     $zip = $_POST["zip"];
     $vivienda = $_POST["vivienda"];
+
     // Datos del cargo
     $cargo = $_POST["cargo"];
     $area = $_POST["area"];
@@ -60,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
     }
 
     // Guarda el nuevo usuario en la base de datos
-    $sql = "INSERT INTO usuarios (nombre, apellido, cedula, email, password, fecha_ingreso) VALUES ('$nombre', '$apellido', '$cedula', '$email', '$password', '$fecha_ingreso')";
+    $sql = "INSERT INTO usuarios (tipo_usuario, nombre, apellido, cedula, email, telefono, password, fecha_ingreso) VALUES ('$tipo_usuario', '$nombre', '$apellido', '$cedula', '$email', '$telefono', '$password', '$fecha_ingreso')";
     $resultado = mysqli_query($conn, $sql);
 
     if (!$resultado) {

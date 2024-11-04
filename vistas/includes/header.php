@@ -26,9 +26,12 @@
         </div>
 
         <div class="menu-navegacion">
-            <a href="index.php?page=inicio" class="boton-nav">Inicio</a>
-
+            
             <?php
+            if (isset($_SESSION['logeado_id'])) {
+                echo '<a href="index.php?page=inicio" class="boton-nav">Inicio</a>';
+            }
+            /* Si esta logeado mostrar el link del panel de RRHH */
             if (isset($_SESSION['logeado_id'])) {
                 echo '<a href="index.php?page=panel_rrhh" class="boton-nav">Panel RRHH</a>';
             }

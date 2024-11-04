@@ -14,6 +14,10 @@
                     <button type="button" onclick="comenzarRegistro()" class="boton-registrar">Registrar</button>
                     <div id="error-registro-hora" style="color:red"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
                 </div>
+
+                <div style="color:green; text-align: center;" id="mensaje-exito-horas">
+                    <!-- Aqui se mostrara el mensaje de exito -->
+                </div>
             </div>
 
             <div id="confirmar-registro" style="display: none;">
@@ -22,6 +26,8 @@
                 <button class="boton-cancelar" type="button" onclick="cancelarRegistro()">Cancelar</button>
                 <!-- El boton de confirmar se crea dinamicamente -->
             </div>
+
+
 
         </div>
 

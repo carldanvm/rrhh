@@ -1,8 +1,0 @@
--Evitar que el usuario entre al formulario de login, si ya esta logeado, redireccionar al panel: LISTO
-
--añadir numero de telefono en la base de datos: LISTO
-
--añadir el input para seleccionar tipo de usuario al registrar un usuario: LISTO
-
--añadir input para numero de telefono: LISTO
-

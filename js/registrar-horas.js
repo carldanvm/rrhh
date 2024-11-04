@@ -14,6 +14,9 @@ function comenzarRegistro() {
         success: function(response) {
             console.log(response);
 
+            //Ocultar mensaje de error #error-registro-hora
+            $("#error-registro-hora").text('');
+
             // Mostrar mensaje de bienvenida y boton para confirmar registro
             confirmarRegistro(response);
         },
@@ -60,6 +63,9 @@ function crearRegistro(tipo_registro, usuario_id) {
             //Ocultar $confirmar-registro y mostrar $comenzar-registro
             $("#confirmar-registro").hide();
             $("#comenzar-registro").show();
+
+            // Mostrar mensaje de exito
+            $("#mensaje-exito-horas").text(response.mensaje);
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText);

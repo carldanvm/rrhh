@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2024 a las 00:36:18
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 05-11-2024 a las 16:25:38
+-- Versión del servidor: 8.3.0
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,15 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `cargos`
 --
 
-CREATE TABLE `cargos` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `cargo` varchar(30) NOT NULL,
-  `area` varchar(30) NOT NULL,
-  `salario_base` int(11) NOT NULL
+DROP TABLE IF EXISTS `cargos`;
+CREATE TABLE IF NOT EXISTS `cargos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  `cargo` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `area` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `salario_base` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -41,15 +44,18 @@ CREATE TABLE `cargos` (
 -- Estructura de tabla para la tabla `direccion`
 --
 
-CREATE TABLE `direccion` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `estado` text NOT NULL,
-  `municipio` text NOT NULL,
-  `ciudad` text NOT NULL,
-  `calle` varchar(30) NOT NULL,
-  `zip` int(11) NOT NULL,
-  `vivienda` varchar(30) NOT NULL
+DROP TABLE IF EXISTS `direccion`;
+CREATE TABLE IF NOT EXISTS `direccion` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  `estado` text COLLATE utf8mb4_general_ci NOT NULL,
+  `municipio` text COLLATE utf8mb4_general_ci NOT NULL,
+  `ciudad` text COLLATE utf8mb4_general_ci NOT NULL,
+  `calle` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `zip` int NOT NULL,
+  `vivienda` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -58,12 +64,15 @@ CREATE TABLE `direccion` (
 -- Estructura de tabla para la tabla `registros`
 --
 
-CREATE TABLE `registros` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `registros`;
+CREATE TABLE IF NOT EXISTS `registros` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
   `entrada` datetime DEFAULT NULL,
   `salida` datetime DEFAULT NULL,
-  `horas_trabajadas` decimal(10,3) DEFAULT NULL
+  `horas_trabajadas` decimal(10,3) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -72,76 +81,21 @@ CREATE TABLE `registros` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
-  `cedula` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `fecha_ingreso` date NOT NULL
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo_usuario` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `cedula` int NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `telefono` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `fecha_ingreso` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cedula` (`cedula`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `cargos`
---
-ALTER TABLE `cargos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario_id` (`usuario_id`);
-
---
--- Indices de la tabla `direccion`
---
-ALTER TABLE `direccion`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario_id` (`usuario_id`);
-
---
--- Indices de la tabla `registros`
---
-ALTER TABLE `registros`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cedula` (`cedula`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `cargos`
---
-ALTER TABLE `cargos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `direccion`
---
-ALTER TABLE `direccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `registros`
---
-ALTER TABLE `registros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

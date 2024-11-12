@@ -1,6 +1,6 @@
 #tabla-empleados th {
   border-bottom: 1px solid #000;
-  background-color: lightsteelblue;
+  background-color: #669BBC;
   padding: 10px;
   padding-inline: 20px;
   border-left: 1px solid #000;
@@ -19,12 +19,13 @@
 }
 
 .encabezado {
-  background-color: lightblue;
+  background-color: #780000;
   padding-block: 15px;
   padding-inline: 30px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  color: white;
 }
 
 .menu-navegacion {
@@ -33,7 +34,7 @@
 }
 
 .boton-nav {
-  color: gray;
+  color: #7e9caf;
   font-size: 1.1rem;
   text-decoration: none;
   transition: color 0.2s;
@@ -41,12 +42,16 @@
 
 .boton-nav:hover {
   opacity: 1;
-  color: black;
+  color: #FDF0D5;
 }
 
 .contenedor {
   padding-inline: 30px;
   padding-block: 20px;
+  background-color: white;
+  margin-inline: 80px;
+  min-height: 100vh;
+  box-shadow: 0px 0px 5px 0px gray;
 }
 
 .registro-horas-contenedor{
@@ -59,6 +64,7 @@
     display: flex;
     justify-content: center;
     border-radius: 5px;
+    border: 2px solid #C1121F;
 }
 
 #formulario-registro-horas{
@@ -79,20 +85,26 @@
 
 .boton-confirmar{
     border-radius: 7px;
-    background: var(--bs-success);
+    background: #003049;
     color: white;
 }
 
 .boton-cancelar{
     border-radius: 7px;
-    background: var(--bs-red);
+    background: #780000;
     color: white;
 }
 
 .boton-registrar{
     border-radius: 7px;
-    background: var(--bs-primary);
+    background: #003049;
     color: white;
+}
+
+.boton-iniciar-sesion{
+  border-radius: 7px;
+  background: #003049;
+  color: white;
 }
 
 .calendario{
@@ -103,8 +115,8 @@
     justify-content: center;
 }
 
-.grupo-form{
-  border: 1px solid black;
+.grupo-form-registro{
+  border: 2px solid #C1121F;
   border-radius: 5px;
   min-height: 455px;
   display: flex;
@@ -112,4 +124,59 @@
   gap: 20px;
   align-items: center;
   padding-top: 10px;
+  box-shadow: 0px 0px 5px 0px gray;
+}
+
+body{
+  background-color: #FDF0D5;
+}
+
+footer{
+  background-color: #780000;
+}
+
+.formulario-login{
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  border: 2px solid #C1121F;
+  border-radius: 5px;
+  padding: 20px;
+  align-items: center;
+}
+
+.barra-lateral{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  border-right: 2px solid #C1121F;
+  margin-left: -18px;
+  margin-top: -40px;
+  margin-bottom: -20px;
+  padding-top: 20px;
+  box-shadow: 5px 0px 5px #c8c8c8;
+}
+
+.barra-lateral-boton a{
+  color: #003049;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.barra-lateral-boton{
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.barra-lateral-boton:hover{
+  background-color: gainsboro;
+}
+
+.contenido-rrhh{
+  padding: 20px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
 }

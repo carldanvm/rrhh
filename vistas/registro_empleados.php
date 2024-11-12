@@ -1,14 +1,14 @@
 <?php include "includes/header.php"; ?>
 
-<hr>
-<h2 style="background-color: lightgray; padding: 10px">Registro de nuevo empleado</h2>
+
+<h2 style="padding: 10px">Registro de nuevo empleado</h2>
 <hr>
 <br>
 
 <form id="registrar-empleado-form" action="index.php?page=registrar" method="post">
     <div class="row">
         <div class="col-4">
-            <div class="grupo-form">
+            <div class="grupo-form-registro">
                 <h4>Datos personales</h4>
 
                 <select id="tipo_usuario" name="tipo_usuario" required>
@@ -66,7 +66,7 @@
 
 
         <div class="col-4">
-            <div class="grupo-form">
+            <div class="grupo-form-registro">
                 <h4>Datos de dirección</h4>
 
                 <input type="text" id="estado" name="estado" placeholder="Estado"
@@ -120,7 +120,7 @@
 
         </div>
         <div class="col-4">
-            <div class="grupo-form">
+            <div class="grupo-form-registro">
                 <h4>Datos del cargo</h4>
 
                 <input type="text" id="cargo" name="cargo" placeholder="Cargo"

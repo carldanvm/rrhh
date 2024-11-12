@@ -2,12 +2,12 @@
 
 <div class="row">
 
-    <div class="col-4 registro-horas-contenedor">
+    <div class="col-12 col-md-4 registro-horas-contenedor">
 
         <div class="registro-horas-formulario">
 
             <div id="comenzar-registro">
-                <h4>Registrar su entrada/salida de trabajo</h4>
+                <h4 style="color:black">Registrar su entrada/salida del trabajo</h4>
                 <div id="formulario-registro-horas">
                     <input type="number" name="cedula" placeholder="Cedula">
                     <input type="text" name="password" placeholder="Clave">
@@ -33,7 +33,7 @@
 
     </div>
 
-    <div class="col-8 calendario">
+    <div class="col-12 col-md-8 calendario">
         <div style="background: #ffffff; padding: 10px;">
             <h2>Aqui va a ir el calendario</h2>
         </div>

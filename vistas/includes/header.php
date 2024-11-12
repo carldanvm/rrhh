@@ -21,7 +21,7 @@
 
 <body>
     <div class="encabezado">
-        <div>
+        <div style="margin-left: 70px;">
             <h1>Sistema de recursos humanos</h1>
         </div>
 

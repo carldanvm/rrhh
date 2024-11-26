@@ -2,15 +2,29 @@
 
 <div class="row">
 
+    <div id="reloj-container">
+        <h2 id="saludo"></h2>
+    </div>
+
+    <div id="calendar-container"> 
+        <h4 style="margin-bottom: 15px" id="calendar-month-year"></h4>
+        <div id="calendar"></div> 
+    </div> 
+    <script src="js/calendario_reloj.js"></script>
+
     <div class="col-12 col-md-4 registro-horas-contenedor">
 
         <div class="registro-horas-formulario">
 
+            <div id="logo-empresa">
+                <img src="img/LogoMicrosoft.jpg" alt="logo de la empresa contratada" id="imagen-empresa">
+            </div>
+
             <div id="comenzar-registro">
-                <div style="font-size: 1rem; font-weight: bold;">Registrar su entrada/salida del trabajo</div>
+                <h4 style="color:black">Registre aquí su entrada o salida</h4>
                 <div id="formulario-registro-horas">
-                    <input type="number" name="cedula" placeholder="Cedula">
-                    <input type="text" name="password" placeholder="Clave">
+                    <input type="number" name="cedula" placeholder="Cédula">
+                    <input type="text" name="password" placeholder="Pin">
                     <button type="button" onclick="comenzarRegistro()" class="boton-registrar">Registrar</button>
                     <div id="error-registro-hora" style="color:red"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
                 </div>
@@ -33,11 +47,7 @@
 
     </div>
 
-    <div class="col-12 col-md-8 calendario">
-        <div style="background: #ffffff; padding: 10px;">
-            <h2>Aqui va a ir el calendario</h2>
-        </div>
-    </div>
+    
 
 
 </div>

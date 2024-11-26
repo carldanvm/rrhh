@@ -47,11 +47,13 @@
 
 .contenedor {
   padding-inline: 30px;
-  padding-block: 20px;
+  padding-bottom: 20px;
   background-color: white;
   margin-inline: 50px;
+  padding: 25px;
   min-height: 100vh;
   box-shadow: 0px 0px 5px 0px gray;
+  background-color: white;
 }
 
 .registro-horas-contenedor{
@@ -266,4 +268,35 @@ footer{
   height: auto;
   display: flex;
   padding-bottom: 15px;
+}
+
+#pagina-login {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-image: url("/rrhh/img/fondoLogin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.login-derecha {
+  height: 100%;
+  width: 50%;
+  padding: 20px;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.login-izquierda {
+  height: 100%;
+  width: 35%;
+  padding: 20px;
+  padding-top: 50px;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  background-color: transparent;
 }

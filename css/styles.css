@@ -69,19 +69,15 @@
     float: right;
     text-align: center;
     flex-direction: column;
+    height: 76%;
 }
 
 #formulario-registro-horas{
     display: flex;
     flex-direction: column;
     gap: 15px;
-    justify-content: center;
-<<<<<<< HEAD
     padding-top: 20px;
     padding-inline: 100px;
-    align-items: center;
-=======
->>>>>>> 11fa19594ab0786bc8bb6e320bf962c1c7dfa6af
 }
 
 #confirmar-registro{

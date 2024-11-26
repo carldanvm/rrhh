@@ -21,7 +21,11 @@
             </div>
 
             <div id="comenzar-registro">
+<<<<<<< HEAD
                 <h4 style="color:black">Registre aquí su entrada o salida</h4>
+=======
+                <div style="font-size: 1rem; font-weight: bold;">Registrar su entrada/salida del trabajo</div>
+>>>>>>> 11fa19594ab0786bc8bb6e320bf962c1c7dfa6af
                 <div id="formulario-registro-horas">
                     <input type="number" name="cedula" placeholder="Cédula">
                     <input type="text" name="password" placeholder="Pin">

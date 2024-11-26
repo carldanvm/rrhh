@@ -19,7 +19,7 @@
 }
 
 .encabezado {
-  background-color: #780000;
+  background-color: #4582ec;
   padding-block: 15px;
   padding-inline: 30px;
   display: flex;
@@ -34,7 +34,7 @@
 }
 
 .boton-nav {
-  color: #7e9caf;
+  color: #fff;
   font-size: 1.1rem;
   text-decoration: none;
   transition: color 0.2s;
@@ -49,13 +49,14 @@
   padding-inline: 30px;
   padding-block: 20px;
   background-color: white;
-  margin-inline: 80px;
+  margin-inline: 50px;
   min-height: 100vh;
   box-shadow: 0px 0px 5px 0px gray;
 }
 
 .registro-horas-contenedor{
     padding-inline: 20px;
+    width: 50%;
 }
 
 .registro-horas-formulario{
@@ -64,7 +65,10 @@
     display: flex;
     justify-content: center;
     border-radius: 5px;
-    border: 2px solid #C1121F;
+    border: 2px solid #4582ec;
+    float: right;
+    text-align: center;
+    flex-direction: column;
 }
 
 #formulario-registro-horas{
@@ -72,7 +76,9 @@
     flex-direction: column;
     gap: 15px;
     justify-content: center;
-    padding-inline: 90px;
+    padding-top: 20px;
+    padding-inline: 100px;
+    align-items: center;
 }
 
 #confirmar-registro{
@@ -91,7 +97,7 @@
 
 .boton-cancelar{
     border-radius: 7px;
-    background: #780000;
+    background: #C1121F;
     color: white;
 }
 
@@ -99,6 +105,7 @@
     border-radius: 7px;
     background: #003049;
     color: white;
+    width: 50%;
 }
 
 .boton-iniciar-sesion{
@@ -107,16 +114,8 @@
   color: white;
 }
 
-.calendario{
-    background-image: url(../img/calendario.jpg);
-    background-size: contain;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .grupo-form-registro{
-  border: 2px solid #C1121F;
+  border: 2px solid #4582ec;
   border-radius: 5px;
   min-height: 455px;
   display: flex;
@@ -128,18 +127,19 @@
 }
 
 body{
-  background-color: #FDF0D5;
+  background-color: #c2d8ff;
 }
 
 footer{
-  background-color: #780000;
+  background-color: #c2d8ff;
+  color: white;
 }
 
 .formulario-login{
   display: flex;
   flex-direction: column;
   max-width: 400px;
-  border: 2px solid #C1121F;
+  border: 2px solid #4582ec;
   border-radius: 5px;
   padding: 20px;
   align-items: center;
@@ -150,7 +150,7 @@ footer{
   flex-direction: column;
   gap: 10px;
   background-color: white;
-  border-right: 2px solid #C1121F;
+  border-right: 2px solid #4582ec;
   margin-left: -18px;
   margin-top: -40px;
   margin-bottom: -20px;
@@ -179,4 +179,85 @@ footer{
   flex-direction: column;
   display: flex;
   align-items: center;
+}
+
+.row {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+#calendar-container {
+  position: absolute;
+  left: 4%;
+  width: 45%;
+  padding: 20px;
+  padding-top: 75px;
+  background-color: transparent;
+  border-right: 1px solid #4582ec;
+  height: 76%;
+  box-sizing: border-box;
+  overflow-y: auto; /* Agrega scroll si es necesario */
+  top: 20%;
+  flex-direction: column;
+}
+
+#calendar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day {
+  width: 14.28%; /* 100% / 7 días */
+  padding: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.holiday {
+  background-color: #ffdddd;
+  border-radius: 50%;
+}
+
+.event {
+  background-color: #ddffdd;
+  border-radius: 50%;
+}
+
+.today {
+  background-color: #c2d8ff;
+  border-radius: 75%;
+}
+
+.day-header {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+#reloj-container {
+  position: flex;
+  left: 50;
+  width: 50%;
+  padding: 0px;
+  padding-top: 0px;
+  border-bottom: 1px solid #4582ec;
+  height: 10%;
+  box-sizing: border-box;
+  text-align: center;
+  flex-direction: column;
+}
+
+#comenzar-registro {
+  padding-bottom: 30px;
+}
+
+#imagen-empresa {
+  width: auto;
+  max-width: 400px;
+  max-height: 400px;
+  height: auto;
+  display: flex;
+  padding-bottom: 15px;
 }

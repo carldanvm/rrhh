@@ -2,32 +2,44 @@
 
 <style>
     /* Ocultar el encabezado solo en esta vista */
-    .encabezado h1{
+    .encabezado h1 {
         display: none;
     }
-    .encabezado{
+
+    .encabezado {
         background-color: white;
+        color: #1282a2;
         box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
         position: relative;
     }
-    .contenedor{
+
+    .boton-nav {
+        color: #1282a2;
+    }
+
+    .boton-nav:hover {
+        opacity: 1;
+        color: #0a1128;
+    }
+
+    .contenedor {
         box-shadow: none;
     }
 </style>
 
-<div class="row" style="margin: 0; min-height: 100%; min-width: 100%;">
+<div class="row" style="margin: 0; width: 100%; height: calc(100vh - 128px);">
     <!-- Barra lateral de opciones -->
     <div class="col-2 barra-lateral">
         <div class="barra-lateral-logo">Logo</div>
         <div class="barra-lateral-boton">
-            <a href="index.php?page=registro_empleados" >Registro empleados</a>
+            <a href="index.php?page=registro_empleados">Registro empleados</a>
         </div>
     </div>
 
 
 
     <!-- Contenido principal -->
-    <div class="col-10 contenido-rrhh" >
+    <div class="col-10 contenido-rrhh">
 
         <!-- Mensaje de exito al registrar empleado -->
         <?php

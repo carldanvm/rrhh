@@ -5,6 +5,10 @@
   overflow-y: auto;
 }
 
+#registrar-empleado-form{
+  margin-bottom: 170px;
+}
+
 #tabla-empleados{
   width: 100%;
   height: 100%;
@@ -32,7 +36,7 @@
 }
 
 .encabezado {
-  background-color: #4582ec;
+  background-color: #0a1128;
   padding-block: 15px;
   padding-inline: 30px;
   display: flex;
@@ -47,7 +51,7 @@
 }
 
 .boton-nav {
-  color: #fff;
+  color: white;
   font-size: 1.1rem;
   text-decoration: none;
   transition: color 0.2s;
@@ -55,14 +59,14 @@
 
 .boton-nav:hover {
   opacity: 1;
-  color: #0a1128;
+  color: #72aab9;
 }
 
 .contenedor {
   min-height: calc(100vh - 130px); /* Altura del viewport menos el header y footer */
   background-color: white;
   margin-inline: 50px;
-  min-height: 100vh;
+  min-height: calc(100vh - 158px);
   box-shadow: 0px 0px 5px 0px gray;
   box-sizing: border-box;
   margin: 0;
@@ -137,7 +141,7 @@
 }
 
 .grupo-form-registro{
-  border: 2px solid #4582ec;
+  border: 2px solid #1282a2;
   border-radius: 5px;
   min-height: 455px;
   display: flex;
@@ -149,11 +153,12 @@
 }
 
 body{
-  background-color: #c2d8ff;
+  margin: 0;
+  padding: 0;
 }
 
 footer{
-  background-color: #c2d8ff;
+  background-color: #0a1128;
   color: white;
 }
 
@@ -171,13 +176,11 @@ footer{
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: white;
-  border-right: 2px solid #4582ec;
-  margin-left: -18px;
-  margin-top: -40px;
-  margin-bottom: -20px;
+  background-color: #034078;
   padding-top: 20px;
-  box-shadow: 5px 0px 5px #c8c8c8;
+  z-index: 2;
+  color: white;
+  margin-top: -56px;
 }
 
 .barra-lateral-boton a{
@@ -193,8 +196,12 @@ footer{
   cursor: pointer;
 }
 
+.barra-lateral-logo{
+  padding-bottom: 20px;
+}
+
 .barra-lateral-boton:hover{
-  background-color: #034078;
+  background-color: #001f54;
 }
 
 .contenido-rrhh{
@@ -208,7 +215,7 @@ footer{
 
 .row {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
 }
 

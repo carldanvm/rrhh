@@ -85,7 +85,6 @@
     flex-direction: column;
     gap: 15px;
     justify-content: center;
-    padding-inline: 90px;
 }
 
 #confirmar-registro{
@@ -93,7 +92,14 @@
     flex-direction: column;
     gap: 15px;
     justify-content: center;
-    padding-inline: 70px;
+}
+
+#comenzar-registro{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
 }
 
 .boton-confirmar{

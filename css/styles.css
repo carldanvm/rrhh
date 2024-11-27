@@ -3,6 +3,7 @@
   height: 100%;
   max-height: calc(100vh - 170px);
   overflow-y: auto;
+  box-shadow: 0px 0px 7px #818181;
 }
 
 #registrar-empleado-form{
@@ -63,10 +64,9 @@
 }
 
 .contenedor {
-  min-height: calc(100vh - 130px); /* Altura del viewport menos el header y footer */
+  min-height: calc(100vh - 158px); /* Altura del viewport menos el header y footer */
   background-color: white;
   margin-inline: 50px;
-  min-height: calc(100vh - 158px);
   box-shadow: 0px 0px 5px 0px gray;
   box-sizing: border-box;
   margin: 0;
@@ -85,10 +85,9 @@
     justify-content: center;
     border-radius: 5px;
     border: 2px solid #4582ec;
-    float: right;
     text-align: center;
     flex-direction: column;
-    height: 76%;
+    margin-bottom: 200px;
 }
 
 #formulario-registro-horas{
@@ -181,7 +180,7 @@ footer{
   padding-top: 20px;
   z-index: 2;
   color: white;
-  margin-top: -56px;
+  margin-top: -57px;
 }
 
 .barra-lateral-boton a{
@@ -221,18 +220,12 @@ footer{
 }
 
 #calendar-container {
-  position: absolute;
-  left: 4%;
-  width: 45%;
   padding: 20px;
   padding-top: 75px;
   background-color: transparent;
-  border-right: 1px solid #4582ec;
-  height: 76%;
   box-sizing: border-box;
   overflow-y: auto; /* Agrega scroll si es necesario */
-  top: 20%;
-  flex-direction: column;
+  margin-bottom: 200px;
 }
 
 #calendar {
@@ -270,16 +263,8 @@ footer{
 }
 
 #reloj-container {
-  position: flex;
-  left: 50;
-  width: 50%;
   padding: 0px;
   padding-top: 0px;
-  border-bottom: 1px solid #4582ec;
-  height: 10%;
-  box-sizing: border-box;
-  text-align: center;
-  flex-direction: column;
 }
 
 #comenzar-registro {

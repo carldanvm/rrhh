@@ -11,6 +11,26 @@
         color: #1282a2;
         box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
         position: relative;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .barra-lateral{
+        border-top-left-radius: 10px;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+    }
+
+    .contenido-rrhh{
+        border-right: 1px solid black;
+    }
+
+    .footer{
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        box-shadow: 0px 5px 5px #a5a5a5;
     }
 
     .boton-nav {
@@ -24,6 +44,10 @@
 
     .contenedor {
         box-shadow: none;
+    }
+    body{
+        padding: 30px;
+        background-color: gainsboro;
     }
 </style>
 

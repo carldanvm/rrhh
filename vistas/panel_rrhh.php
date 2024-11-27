@@ -117,6 +117,8 @@
 </div>
 
 
+<!-- Modales -->
+ <?php include 'modals/empleadoModal.php'; ?>
 
 <?php include 'includes/footer.php'; ?>
 

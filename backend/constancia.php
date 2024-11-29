@@ -45,6 +45,7 @@ $html = '
 </html>
 ';
 
+// Insertar el contenido en el PDF, configurar el tamaño y la orientación
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 

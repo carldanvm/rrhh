@@ -1,57 +1,61 @@
 <?php include 'includes/header.php'; ?>
-<div class="w-100">
-    <div class="row d-flex align-items-center flex-1 flex-row">
 
-        <div style="border-right: 1px solid black; height: 100%;" class="col-6 d-flex flex-column align-items-center justify-content-center">
-            <div id="reloj-container">
-                <h2 id="saludo"></h2>
-            </div>
+<div class="container-fluid" >
+    <div class="row full-page">
 
-            <div id="calendar-container">
-                <h4 style="margin-bottom: 15px" id="calendar-month-year"></h4>
-                <div id="calendar"></div>
-            </div>
-        </div>
 
-        <script src="js/calendario_reloj.js"></script>
+        <div class="col-12 col-md-6">
 
-        <div class="col-6 d-flex flex-column align-items-center justify-content-center registro-horas-contenedor">
+            <div class="card">
 
-            <div class="registro-horas-formulario">
 
-                <div id="logo-empresa">
-                    <img src="img/LogoMicrosoft.jpg" alt="logo de la empresa contratada" id="imagen-empresa">
-                </div>
+                <img class="card-img-top" src="img/LogoMicrosoft.jpg" alt="logo de la empresa contratada">
 
-                <div id="comenzar-registro">
-                    <h4 style="color:black">Registre aquí su entrada o salida</h4>
-                    <div id="formulario-registro-horas">
-                        <input type="number" name="cedula" placeholder="Cédula">
-                        <input type="text" name="password" placeholder="Pin">
-                        <button type="button" onclick="comenzarRegistro()" class="boton-registrar">Registrar</button>
-                        <div id="error-registro-hora" style="color:red"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
+                <div class="card-body p-4">
+                    <div id="comenzar-registro" class="text-center">
+                        <h4 class="card-title text-dark mb-4">Registre aquí su entrada o salida</h4>
+                        <div id="formulario-registro-horas" class="d-flex flex-column gap-3">
+                            <input type="number" name="cedula" placeholder="Cédula" class="form-control">
+                            <input type="text" name="password" placeholder="Pin" class="form-control">
+                            <button type="button" onclick="comenzarRegistro()" class="btn btn-primary boton-registrar">Registrar</button>
+                            <div id="error-registro-hora" class="text-danger"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
+                        </div>
+
+                        <div id="mensaje-exito-horas" class="text-success mt-3">
+                            <!-- Aqui se mostrara el mensaje de exito -->
+                        </div>
                     </div>
 
-                    <div style="color:green; text-align: center;" id="mensaje-exito-horas">
-                        <!-- Aqui se mostrara el mensaje de exito -->
+                    <div id="confirmar-registro" class="text-center" style="display: none;">
+                        <h4 id="mensaje-bienvenida" class="card-title mb-3"><!-- Mensaje de bienvenida --></h4>
+                        <div id="info-registro" class="mb-3"><!-- Informacion de registro (es salida o entrada) --></div>
+                        <button class="btn btn-danger boton-cancelar" type="button" onclick="cancelarRegistro()">Cancelar</button>
+                        <!-- El boton de confirmar se crea dinamicamente -->
                     </div>
                 </div>
-
-                <div id="confirmar-registro" style="display: none;">
-                    <h4 id="mensaje-bienvenida"><!-- Mensaje de bienvenida --></h4>
-                    <div id="info-registro"><!-- Informacion de registro (es salida o entrada) --></div>
-                    <button class="boton-cancelar" type="button" onclick="cancelarRegistro()">Cancelar</button>
-                    <!-- El boton de confirmar se crea dinamicamente -->
-                </div>
-
-
 
             </div>
 
         </div>
+
+
+        <div class="col-12 col-md-6">
+            <div id="reloj-container" class="text-center p-4 mb-4 bg-light rounded shadow-sm">
+                <h2 id="saludo" class="display-4 mb-0"></h2>
+            </div>
+
+            <div id="calendar-container" class="bg-white p-4 rounded shadow-sm">
+                <h4 id="calendar-month-year" class="text-primary mb-4 text-center"></h4>
+                <div id="calendar" class="border rounded"></div>
+            </div>
+        </div>
+
+
 
     </div>
 </div>
+
+
 
 
 

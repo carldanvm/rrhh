@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <title>RRHH</title>
@@ -20,32 +20,44 @@
 </head>
 
 <body>
-    <div class="encabezado">
-        <div style="margin-left: 20px;">
-            <h1>Sistema de recursos humanos</h1>
-        </div>
+    <header class="sticky-top bg-dark text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                
+                <!-- Logo/Título -->
+                <a class="navbar-brand" href="index.php?page=inicio">
+                    <h1 style="font-size: 1.3rem;" class="h3 mb-0">Sistema de recursos humanos</h1>
+                </a>
 
-        <div class="menu-navegacion">
-            
-            <?php
-            if (isset($_SESSION['logeado_id'])) {
-                echo '<a href="index.php?page=inicio" class="boton-nav">Inicio</a>';
-            }
-            /* Si esta logeado mostrar el link del panel de RRHH */
-            if (isset($_SESSION['logeado_id'])) {
-                echo '<a href="index.php?page=panel_rrhh" class="boton-nav">Panel RRHH</a>';
-            }
-            /* Si no esta logeado mostrar el link de iniciar sesion */
-            if (!isset($_SESSION['logeado_id'])) {
-                echo '<a href="index.php?page=login" class="boton-nav">Iniciar sesión</a>';
-            };
+                <!-- Botón hamburguesa para móviles -->
+                <button style="padding: 2px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            /* Mostrar el link de cerrar sesion solo si la sesion fue iniciada */
-            if (isset($_SESSION['logeado_id'])) {
-                echo '<a href="index.php?page=logout" class="boton-nav">Cerrar sesión</a>';
-            }
-            ?>
-        </div>
-    </div>
+                <!-- Menú de navegación -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <?php
+                        if (isset($_SESSION['logeado_id'])) {
+                            echo '<li class="nav-item">
+                                <a class="nav-link" href="index.php?page=inicio">Inicio</a>
+                              </li>';
 
-    <div class="contenedor">
+                            echo '<li class="nav-item">
+                                <a class="nav-link" href="index.php?page=panel_rrhh">Panel RRHH</a>
+                              </li>';
+
+                            echo '<li class="nav-item">
+                                <a class="nav-link" href="index.php?page=logout">Cerrar sesión</a>
+                              </li>';
+                        } else {
+                            echo '<li class="nav-item">
+                                <a class="nav-link" href="index.php?page=login">Iniciar sesión</a>
+                              </li>';
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>

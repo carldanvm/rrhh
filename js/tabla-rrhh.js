@@ -65,6 +65,9 @@ async function infoEmpleado(id) {
 }
 
 function llenarModal(response) {
+    // Limpiar el data-empleado-id
+    $('#empleadoModal').attr('data-empleado-id', '');
+
     // Campos del modal
     let tipoUsuario = $('#empleadoModal #tipo-usuario');
     let nombre = $('#empleadoModal #nombre');
@@ -105,7 +108,9 @@ function llenarModal(response) {
     codigoPostal.val('');
     tipoVivienda.val('');
 
+
     // Llenar modal
+    $('#empleadoModal').attr('data-empleado-id', response.id);
     tipoUsuario.text(response.tipo_usuario);
     nombre.text(response.nombre);
     apellido.text(response.apellido); 

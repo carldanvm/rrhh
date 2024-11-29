@@ -28,10 +28,11 @@
             <div class="mb-2"><strong>Calle:</strong> <span id="calle" class="text-secondary"></span></div>
             <div class="mb-2"><strong>Código postal:</strong> <span id="codigo-postal" class="text-secondary"></span></div>
             <div class="mb-2"><strong>Tipo de vivienda:</strong> <span id="tipo-vivienda" class="text-secondary"></span></div>
+
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="generar-constancia">Generar constancia de trabajo</button>
+        <button type="button" class="btn btn-primary" onclick=generarConstancia()>Generar constancia</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>

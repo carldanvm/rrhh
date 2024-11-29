@@ -3,6 +3,13 @@
 include 'db.php';
 header("Content-Type: application/json");
 
+// Si no hay una sesión iniciada, redirigir al inicio
+session_start();
+if(!isset($_SESSION['logeado_id'])) {
+    header('Location: ../index.php?page=login');
+    exit();
+}
+
 $empleadoId = isset($_POST['empleadoId']) ? $_POST['empleadoId'] : null;
 
 if (!$empleadoId) {

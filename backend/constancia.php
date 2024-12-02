@@ -1,20 +1,40 @@
-<?php 
+<?php
 header("Content-Type: application/json");
 include 'db.php';
 require_once('lib/dompdf/autoload.inc.php');
+
 use Dompdf\Dompdf;
 
+// Si no hay una sesión iniciada, redirigir al inicio
+session_start();
+if (!isset($_SESSION['logeado_id'])) {
+    header('Location: ../index.php?page=login');
+    exit();
+}
+
 // Función para convertir números a palabras 
-function numero_a_palabras($num) { 
-    $f = new NumberFormatter("es", NumberFormatter::SPELLOUT); return $f->format($num); 
+function numero_a_palabras($num)
+{
+    $f = new NumberFormatter("es", NumberFormatter::SPELLOUT);
+    return $f->format($num);
 }
 
 // Función para formatear la fecha de forma escrita
-function formatoFechaEspanol($fecha) {
+function formatoFechaEspanol($fecha)
+{
     $meses = [
-        1 => 'enero', 2 => 'febrero', 3 => 'marzo', 4 => 'abril',
-        5 => 'mayo', 6 => 'junio', 7 => 'julio', 8 => 'agosto',
-        9 => 'septiembre', 10 => 'octubre', 11 => 'noviembre', 12 => 'diciembre'
+        1 => 'enero',
+        2 => 'febrero',
+        3 => 'marzo',
+        4 => 'abril',
+        5 => 'mayo',
+        6 => 'junio',
+        7 => 'julio',
+        8 => 'agosto',
+        9 => 'septiembre',
+        10 => 'octubre',
+        11 => 'noviembre',
+        12 => 'diciembre'
     ];
 
     $fechaTimestamp = strtotime($fecha);
@@ -26,13 +46,6 @@ function formatoFechaEspanol($fecha) {
 }
 
 
-// Si no hay una sesión iniciada, redirigir al inicio
-session_start();
-if(!isset($_SESSION['logeado_id'])) {
-    header('Location: ../index.php?page=login');
-    exit();
-}
-
 // Obtener el ID del usuario al que se le va a generar la constancia, viene por POST
 $empleadoId = $_POST['empleadoId'];
 if (!$empleadoId) {
@@ -40,34 +53,35 @@ if (!$empleadoId) {
     exit();
 }
 
-// Obtener la información del empleado que se va a utilizar para la constancia
-$sql = "SELECT usuarios.id, tipo_usuario, nombre, apellido, cedula, email, telefono, fecha_ingreso, cargos.cargo, cargos.area, cargos.salario_base, direccion.estado, direccion.municipio, direccion.ciudad, direccion.calle, direccion.zip, direccion.vivienda FROM `usuarios` LEFT JOIN cargos ON usuarios.id = cargos.usuario_id LEFT JOIN direccion ON usuarios.id = direccion.usuario_id WHERE usuarios.id = $empleadoId";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    $empleado = $result->fetch_assoc();
-    $nombre = $empleado['nombre'];
-    $apellido = $empleado['apellido'];
-    $cedula = $empleado['cedula'];
-    $telefono = $empleado['telefono'];
-    $fecha_ingreso = $empleado['fecha_ingreso'];
-    $cargo = $empleado['cargo'];
-    $salario = $empleado['salario_base'];
-    $area = $empleado['area'];
-} else {
-    echo json_encode(['error' => 'Empleado no encontrado']);
-    exit();
-}
+try {
+    // Obtener la información del empleado que se va a utilizar para la constancia
+    $sql = "SELECT usuarios.id, tipo_usuario, nombre, apellido, cedula, email, telefono, fecha_ingreso, cargos.cargo, cargos.area, cargos.salario_base, direccion.estado, direccion.municipio, direccion.ciudad, direccion.calle, direccion.zip, direccion.vivienda FROM `usuarios` LEFT JOIN cargos ON usuarios.id = cargos.usuario_id LEFT JOIN direccion ON usuarios.id = direccion.usuario_id WHERE usuarios.id = $empleadoId";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $empleado = $result->fetch_assoc();
+        $nombre = $empleado['nombre'];
+        $apellido = $empleado['apellido'];
+        $cedula = $empleado['cedula'];
+        $telefono = $empleado['telefono'];
+        $fecha_ingreso = $empleado['fecha_ingreso'];
+        $cargo = $empleado['cargo'];
+        $salario = $empleado['salario_base'];
+        $area = $empleado['area'];
+    } else {
+        echo json_encode(['error' => 'Empleado no encontrado']);
+        exit();
+    }
 
-$salario_en_palabras = numero_a_palabras($salario);
+    $salario_en_palabras = numero_a_palabras($salario);
 
-$fecha_actual = formatoFechaEspanol(date('Y-m-d'));
-$fecha_ingreso_escrita = formatoFechaEspanol($fecha_ingreso);
+    $fecha_actual = formatoFechaEspanol(date('Y-m-d'));
+    $fecha_ingreso_escrita = formatoFechaEspanol($fecha_ingreso);
 
-// Crear el PDF
-$dompdf = new Dompdf();
+    // Crear el PDF
+    $dompdf = new Dompdf();
 
-// Generar el contenido del PDF
-$html = "
+    // Generar el contenido del PDF
+    $html = "
 <!DOCTYPE html>
 <html lang='es'>
 <head>
@@ -97,8 +111,8 @@ $html = "
     <div class='content'>
         <p style='text-indent: 50px;'>Por medio de la presente, hacemos constar que <b>" . $nombre . " " . $apellido . "</b>,
         portador de la cédula de identidad número <b>" . $cedula . "</b> y número de teléfono <b>" . $telefono . "</b>, 
-        labora en nuestra empresa <b>Microsoft Corp.</b> desde el " . $fecha_ingreso_escrita 
-        . " hasta la actualidad. Desempeña el cargo de <b>" . $cargo . "</b> en el departamento de <b>" . $area 
+        labora en nuestra empresa <b>Microsoft Corp.</b> desde el " . $fecha_ingreso_escrita
+        . " hasta la actualidad. Desempeña el cargo de <b>" . $cargo . "</b> en el departamento de <b>" . $area
         . "</b> con un salario mensual de <b>$" . $salario . " (" . $salario_en_palabras . " dólares estadounidenses)</b>,
         demostrando un alto nivel de compromiso, responsabilidad y dedicación en las labores que le han sido asignadas.</p>
 
@@ -119,21 +133,25 @@ $html = "
 </body>
 </html>";
 
-// Insertar el contenido en el PDF, configurar el tamaño y la orientación
-$dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
+    // Insertar el contenido en el PDF, configurar el tamaño y la orientación
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
 
-// Renderizar el PDF
-$dompdf->render();
+    // Renderizar el PDF
+    $dompdf->render();
 
-// Generar nombre unico para el PDF
-$fecha = date('Y-m-d_H-i-s');
-$pdfFile = 'constancias/constancia-trabajo_empleado_' . $empleadoId . '_' . $fecha . '.pdf';
+    // Generar nombre unico para el PDF
+    $fecha = date('Y-m-d_H-i-s');
+    $pdfFile = 'constancias/constancia-trabajo_empleado_' . $empleadoId . '_' . $fecha . '.pdf';
 
-// Guardar el PDF en el servidor
-file_put_contents($pdfFile, $dompdf->output());
+    // Guardar el PDF en el servidor
+    file_put_contents($pdfFile, $dompdf->output());
+} catch (Exception $e) {
+    echo json_encode(['error' => 'Error al generar la constancia: ' . $e->getMessage()]);
+    exit();
+}
+
+
 
 // Enviar el PDF al navegador
 echo json_encode(['success' => true, 'pdf_url' => 'backend/' . $pdfFile]);
-
-?>

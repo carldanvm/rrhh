@@ -18,12 +18,12 @@ function getEmpleados() {
 }
 
 function llenarTabla(response) {
-    let tabla = $("#tabla-empleados");
+    let tbody = $("#tabla-empleados tbody");
     let empleados = response;
 
     empleados.forEach(empleado => {
         let fila = `
-            <tr id="${empleado.id}" onclick="infoEmpleado(${empleado.id})">
+            <tr class="cursor-pointer" id="${empleado.id}" onclick="infoEmpleado(${empleado.id})">
                 <td>${empleado.id}</td>
                 <td>${empleado.tipo_usuario}</td>
                 <td>${empleado.nombre}</td>
@@ -34,7 +34,7 @@ function llenarTabla(response) {
             </tr>
         `
 
-        tabla.append(fila);
+        tbody.append(fila);
     })
 
 }

@@ -60,5 +60,5 @@
 
 
 
-
+<script src="js/calendario_reloj.js"></script>
 <?php include 'includes/footer.php'; ?>

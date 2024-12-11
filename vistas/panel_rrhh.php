@@ -47,6 +47,18 @@
                                 Email
                             </th>
                             <th scope="col">
+                                Cargo
+                            </th>
+                            <th scope="col">
+                                Salario por hora
+                            </th>
+                            <th scope="col">
+                                Horas trabajadas
+                            </th>
+                            <th scope="col">
+                                Monto a cobrar
+                            </th>
+                            <th scope="col">
                                 Fecha de ingreso
                             </th>
                         </tr>

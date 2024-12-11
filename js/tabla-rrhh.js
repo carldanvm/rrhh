@@ -30,14 +30,20 @@ function llenarTabla(response) {
                 <td>${empleado.apellido}</td>
                 <td>${empleado.cedula}</td>
                 <td>${empleado.email}</td>
+                <td>${empleado.cargo}</td>
+                <td>$${empleado.salario_base}</td>
+                <td>${empleado.horas_trabajadas}h</td>
+                <td>$${empleado.por_cobrar}</td>
                 <td>${empleado.fecha_ingreso}</td>
             </tr>
+            
         `
-
         tbody.append(fila);
     })
 
 }
+
+
 
 async function infoEmpleado(id) {
     console.log("Clicked: " + id);

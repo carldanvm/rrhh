@@ -38,10 +38,10 @@ function confirmarRegistro(response) {
     
     if (tipo_registro == 'entrada') {
         $("#info-registro").html('Confirma tu entrada');
-        $("#confirmar-registro").append('<button type="button" class="boton-confirmar" onclick="crearRegistro(\'entrada\', ' +response.id+ ')">Confirmar Entrada</button>');
+        $("#confirmar-registro").append('<button type="button" class="boton-confirmar btn btn-primary" onclick="crearRegistro(\'entrada\', ' +response.id+ ')">Confirmar Entrada</button>');
     } else if (tipo_registro == 'salida') {
         $("#info-registro").html('Confirma tu salida, entraste a las ' + response.hora_entrada);
-        $("#confirmar-registro").append('<button type="button" class="boton-confirmar" onclick="crearRegistro(\'salida\', ' +response.id+ ')">Confirmar Salida</button>');
+        $("#confirmar-registro").append('<button type="button" class="boton-confirmar btn btn-primary" onclick="crearRegistro(\'salida\', ' +response.id+ ')">Confirmar Salida</button>');
     }
 
     $("#comenzar-registro").hide();

@@ -8,7 +8,7 @@ RewriteEngine On
 RewriteBase /rrhh/
 
 # Permite acceso directo a archivos css, js, imágenes, etc
-RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|php)$ - [L]
+RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|php|pdf)$ - [L]
 
 # Desactiva la visualización del contenido de carpetas
 Options -Indexes

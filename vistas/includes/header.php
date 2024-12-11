@@ -25,8 +25,9 @@
             <div class="container-fluid">
                 
                 <!-- Logo/Título -->
-                <a class="navbar-brand" href="index.php?page=inicio">
-                    <h1 style="font-size: 1.3rem;" class="h3 mb-0">Sistema de recursos humanos</h1>
+                <a class="navbar-brand d-flex align-items-center justify-content-center" href="index.php?page=inicio">
+                    <img style="width: auto; height: 50px;" src="img/logo-rrhh.png" alt="Header Logo" class="">
+                    <h1 style="font-size: 1.2rem; margin: 0;">RHControl</h1>
                 </a>
 
                 <!-- Botón hamburguesa para móviles -->

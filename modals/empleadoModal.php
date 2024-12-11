@@ -23,8 +23,9 @@
 
             <h5 class="mb-3 text-primary border-bottom pb-2 mt-3">Dirección</h5>
             <div class="mb-2"><strong>Estado:</strong> <span id="estado" class="text-secondary"></span></div>
-            <div class="mb-2"><strong>Ciudad:</strong> <span id="ciudad" class="text-secondary"></span></div>
+
             <div class="mb-2"><strong>Municipio:</strong> <span id="municipio" class="text-secondary"></span></div>
+            <div class="mb-2"><strong>Parroquia:</strong> <span id="parroquia" class="text-secondary"></span></div>
             <div class="mb-2"><strong>Calle:</strong> <span id="calle" class="text-secondary"></span></div>
             <div class="mb-2"><strong>Código postal:</strong> <span id="codigo-postal" class="text-secondary"></span></div>
             <div class="mb-2"><strong>Tipo de vivienda:</strong> <span id="tipo-vivienda" class="text-secondary"></span></div>
@@ -33,7 +34,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick=generarConstancia()>Generar constancia</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>

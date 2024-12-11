@@ -1,5 +1,5 @@
 <?php include "includes/header.php"; ?>
-<script src="js/selectorDirecciones.js"></script>
+
 
 <div class="container-fluid">
     <form class="" id="registrar-empleado-form" action="index.php?page=registrar" method="post">
@@ -98,34 +98,26 @@
                     </div>
 
                     <div class="card-body">
+
                         <div class="mb-3">
                             <label for="estado" class="form-label">Estado</label>
-                            <input class="form-control" type="text" id="estado" name="estado"
-                                required pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$"
-                                title="El estado solo puede contener letras y no puede estar vacio o en blanco"
-                                value="<?php if (isset($_SESSION['datos_form']['estado'])) {
-                                            echo $_SESSION['datos_form']['estado'];
-                                        } ?>">
+                            <select class="form-select" id="estado" name="estado" aria-label="Estado">
+                                <option selected disabled value="">Seleccione un estado</option>
+                            </select required>
                         </div>
 
                         <div class="mb-3">
                             <label for="municipio" class="form-label">Municipio</label>
-                            <input class="form-control" type="text" id="municipio" name="municipio"
-                                required pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$"
-                                title="El municipio solo puede contener letras y no puede estar vacio o en blanco"
-                                value="<?php if (isset($_SESSION['datos_form']['municipio'])) {
-                                            echo $_SESSION['datos_form']['municipio'];
-                                        } ?>">
+                            <select class="form-select" id="municipio" name="municipio" aria-label="Municipio">
+                                <option selected disabled value="">Seleccione un municipio</option>
+                            </select required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="ciudad" class="form-label">Ciudad</label>
-                            <input class="form-control" type="text" id="ciudad" name="ciudad"
-                                required pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$"
-                                title="La ciudad solo puede contener letras y no puede estar vacio o en blanco"
-                                value="<?php if (isset($_SESSION['datos_form']['ciudad'])) {
-                                            echo $_SESSION['datos_form']['ciudad'];
-                                        } ?>">
+                            <label for="parroquia" class="form-label">Parroquia</label>
+                            <select class="form-select" id="parroquia" name="parroquia" aria-label="Parroquia">
+                                <option selected disabled value="">Seleccione una parroquia</option>
+                            </select required>   
                         </div>
 
                         <div class="mb-3">
@@ -223,5 +215,5 @@
     </form>
 </div>
 
-
+<script src="js/selectorDirecciones.js"></script>
 <?php include "includes/footer.php"; ?>

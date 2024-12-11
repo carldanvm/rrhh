@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 11, 2024 at 04:55 PM
+-- Generation Time: Dec 11, 2024 at 07:06 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -36,7 +36,19 @@ CREATE TABLE IF NOT EXISTS `cargos` (
   `salario_base` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cargos`
+--
+
+INSERT INTO `cargos` (`id`, `usuario_id`, `cargo`, `area`, `salario_base`) VALUES
+(5, 1, 'Admin', 'Admin', 100),
+(6, 7, 'Gerente de recursos humanos', 'Recursos humanos', 15),
+(7, 9, 'Programador', 'Sistemas', 20),
+(8, 10, 'Conserje', 'Mantenimiento', 5),
+(9, 11, 'Contador', 'Finanzas', 10),
+(10, 12, 'Programador', 'Sistemas', 26);
 
 -- --------------------------------------------------------
 
@@ -577,7 +589,19 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   `vivienda` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `direccion`
+--
+
+INSERT INTO `direccion` (`id`, `usuario_id`, `estado`, `municipio`, `parroquia`, `ciudad`, `calle`, `zip`, `vivienda`) VALUES
+(5, 1, '14', '241', '648', '', '10', 1000, 'Apartamento'),
+(6, 7, '14', '241', '648', '', '25', 1001, 'Casa'),
+(7, 9, '14', '241', '648', '', 'La asuncion', 1002, 'Casa'),
+(8, 10, '14', '241', '648', '', 'Azul', 1003, 'Apartamento'),
+(9, 11, '14', '241', '648', '', 'Verde', 1004, 'Casa'),
+(10, 12, '3', '33', '99', '', 'negro', 7203, 'Casa');
 
 -- --------------------------------------------------------
 
@@ -2154,7 +2178,20 @@ CREATE TABLE IF NOT EXISTS `registros` (
   `horas_trabajadas` decimal(10,3) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `registros`
+--
+
+INSERT INTO `registros` (`id`, `usuario_id`, `entrada`, `salida`, `horas_trabajadas`) VALUES
+(1, 1, '2024-12-11 05:38:49', '2024-12-11 09:39:04', 5.000),
+(3, 1, '2024-12-11 13:30:08', '2024-12-11 13:30:13', 0.001),
+(4, 7, '2024-12-02 07:30:08', '2024-12-02 17:30:13', 9.500),
+(5, 9, '2024-12-02 07:30:08', '2024-12-02 15:30:13', 7.500),
+(6, 10, '2024-12-04 07:30:08', '2024-12-04 15:30:13', 8.500),
+(7, 11, '2024-12-10 07:30:08', '2024-12-10 15:30:13', 8.000),
+(8, 1, '2024-12-11 13:42:48', '2024-12-11 13:43:10', 0.006);
 
 -- --------------------------------------------------------
 
@@ -2176,7 +2213,19 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `cedula` (`cedula`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `tipo_usuario`, `nombre`, `apellido`, `cedula`, `email`, `telefono`, `password`, `fecha_ingreso`) VALUES
+(1, 'rrhh', 'admin', 'admin', 123, 'admin@gmail.com', '123', '0', '2024-12-11'),
+(7, 'rrhh', 'Pepito', 'Perez', 1234, 'pepito@gmail.com', '04121234567', '0', '2023-11-06'),
+(9, 'empleado', 'Juan', 'Perez', 12345, 'juan@gmail.com', '04121234564', '0', '2023-04-10'),
+(10, 'empleado', 'Sebastian', 'Perez', 123456, 'sebastian@gmail.com', '04121234560', '0', '2023-09-07'),
+(11, 'empleado', 'Carlos', 'Perez', 1234567, 'carlos@gmail.com', '04121234577', '0', '2023-12-08'),
+(12, 'rrhh', 'Angel', 'Cepeda', 7777, 'angel@gmail.com', '0412777777', '0', '2024-12-11');
 
 --
 -- Constraints for dumped tables

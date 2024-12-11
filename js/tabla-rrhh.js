@@ -88,8 +88,8 @@ function llenarModal(response) {
     let salario = $('#empleadoModal #salario');
     
     let estado = $('#empleadoModal #estado');
-    let ciudad = $('#empleadoModal #ciudad');
     let municipio = $('#empleadoModal #municipio');
+    let parroquia = $('#empleadoModal #parroquia');
     let calle = $('#empleadoModal #calle');
     let codigoPostal = $('#empleadoModal #codigo-postal');
     let tipoVivienda = $('#empleadoModal #tipo-vivienda');
@@ -108,7 +108,7 @@ function llenarModal(response) {
     salario.val('');
     
     estado.val('');
-    ciudad.val('');
+    parroquia.val('');
     municipio.val('');
     calle.val('');
     codigoPostal.val('');
@@ -130,7 +130,7 @@ function llenarModal(response) {
     salario.text(response.salario_base);
     
     estado.text(response.estado);
-    ciudad.text(response.ciudad);
+    parroquia.text(response.parroquia);
     municipio.text(response.municipio);
     calle.text(response.calle);
     codigoPostal.text(response.zip);

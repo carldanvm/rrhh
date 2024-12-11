@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
     // Datos de la direccion
     $estado = $_POST["estado"];
     $municipio = $_POST["municipio"];
-    $ciudad = $_POST["ciudad"];
+    $parroquia = $_POST["parroquia"];
     $calle = $_POST["calle"];
     $zip = $_POST["zip"];
     $vivienda = $_POST["vivienda"];
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
 
 
     // Guarda la nueva direccion en la base de datos
-    $sql = "INSERT INTO direccion (usuario_id, estado, municipio, ciudad, calle, zip, vivienda) VALUES ('$id', '$estado', '$municipio', '$ciudad', '$calle', '$zip', '$vivienda')";
+    $sql = "INSERT INTO direccion (usuario_id, estado, municipio,parroquia , calle, zip, vivienda) VALUES ('$id', '$estado', '$municipio', '$parroquia', '$calle', '$zip', '$vivienda')";
     $resultado = mysqli_query($conn, $sql);
 
     if (!$resultado) {

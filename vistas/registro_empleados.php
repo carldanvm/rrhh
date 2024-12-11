@@ -1,4 +1,5 @@
 <?php include "includes/header.php"; ?>
+<script src="js/selectorDirecciones.js"></script>
 
 <div class="container-fluid">
     <form class="" id="registrar-empleado-form" action="index.php?page=registrar" method="post">

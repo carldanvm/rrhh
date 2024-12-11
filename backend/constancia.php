@@ -72,13 +72,36 @@ try {
         exit();
     }
 
+    /* Validar que el salario sea un número válido y no nulo */
+    if (!is_numeric($salario) || $salario === null) {
+        throw new Exception('El salario debe ser un número válido');
+        exit();
+    }
+
+    /* Validar que la fecha de ingreso sea una fecha válida y no nula */
+    if (!is_string($fecha_ingreso) || $fecha_ingreso === null) {
+        throw new Exception('La fecha de ingreso debe ser una fecha válida');
+        exit();
+    }
+
+
     $salario_en_palabras = numero_a_palabras($salario);
 
     $fecha_actual = formatoFechaEspanol(date('Y-m-d'));
     $fecha_ingreso_escrita = formatoFechaEspanol($fecha_ingreso);
 
+    /* Ruta de la imagen de la empresa */
+    $logoPath = realpath(dirname(__DIR__) . '/img/logo.png');
+    $imageData = base64_encode(file_get_contents($logoPath));
+    $src = "data:image/png;base64," . $imageData;
+
+
+    /* Configurar Dompdf */
+    $options = new \Dompdf\Options();
+    $options->set('isRemoteEnabled', true);
+
     // Crear el PDF
-    $dompdf = new Dompdf();
+    $dompdf = new Dompdf($options);
 
     // Generar el contenido del PDF
     $html = "
@@ -101,7 +124,7 @@ try {
 </head>
 <body>
     <div class='header'>
-        <img src='img/LogoMicrosoft.jpg' class='logo' height='100' alt='logo de la empresa contratada'>
+        <img src='$src' class='logo' height='100' alt='$src'>
         <div class='date'>Caracas, " . $fecha_actual . "</div>
         <div class='clear'></div>
     </div>
@@ -111,9 +134,9 @@ try {
     <div class='content'>
         <p style='text-indent: 50px;'>Por medio de la presente, hacemos constar que <b>" . $nombre . " " . $apellido . "</b>,
         portador de la cédula de identidad número <b>" . $cedula . "</b> y número de teléfono <b>" . $telefono . "</b>, 
-        labora en nuestra empresa <b>Microsoft Corp.</b> desde el " . $fecha_ingreso_escrita
+        labora en nuestra empresa <b>General de seguros.</b> desde el " . $fecha_ingreso_escrita
         . " hasta la actualidad. Desempeña el cargo de <b>" . $cargo . "</b> en el departamento de <b>" . $area
-        . "</b> con un salario mensual de <b>$" . $salario . " (" . $salario_en_palabras . " dólares estadounidenses)</b>,
+        . "</b> con un salario por hora de <b>$" . $salario . " (" . $salario_en_palabras . " dólares estadounidenses)</b>,
         demostrando un alto nivel de compromiso, responsabilidad y dedicación en las labores que le han sido asignadas.</p>
 
         <p style='text-indent: 50px;'>Esta constancia se expide a solicitud del interesado, a los efectos que estime conveniente. Si tiene
@@ -146,12 +169,15 @@ try {
 
     // Guardar el PDF en el servidor
     file_put_contents($pdfFile, $dompdf->output());
+
+    // Enviar el PDF al navegador
+    echo json_encode(['success' => true, 'pdf_url' => 'backend/' . $pdfFile]);
 } catch (Exception $e) {
-    echo json_encode(['error' => 'Error al generar la constancia: ' . $e->getMessage()]);
+    http_response_code(500);
+    echo json_encode(['error' => $e->getMessage()]);
     exit();
 }
 
 
 
-// Enviar el PDF al navegador
-echo json_encode(['success' => true, 'pdf_url' => 'backend/' . $pdfFile]);
+

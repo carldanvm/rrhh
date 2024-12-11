@@ -14,12 +14,12 @@ function generarConstancia(){
                 // Abrir la constancia en una nueva ventana
                 window.open(response.pdf_url, '_blank');
             }else{
-                alert('Error al generar la constancia' + (response.error || ''));
+                alert('Error al generar la constancia' + response.error);
             }
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText);
-            alert('Error al generar la constancia');
+            alert('Error del servidor al generar la constancia: ' + xhr.responseJSON.error);
         }
     })
 }

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Dec 11, 2024 at 07:06 PM
--- Server version: 9.1.0
--- PHP Version: 8.3.14
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 07-01-2025 a las 00:43:10
+-- Versión del servidor: 9.1.0
+-- Versión de PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rrhh`
+-- Base de datos: `rrhh`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cargos`
+-- Estructura de tabla para la tabla `cargos`
 --
 
 DROP TABLE IF EXISTS `cargos`;
@@ -38,22 +38,10 @@ CREATE TABLE IF NOT EXISTS `cargos` (
   KEY `usuario_id` (`usuario_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cargos`
---
-
-INSERT INTO `cargos` (`id`, `usuario_id`, `cargo`, `area`, `salario_base`) VALUES
-(5, 1, 'Admin', 'Admin', 100),
-(6, 7, 'Gerente de recursos humanos', 'Recursos humanos', 15),
-(7, 9, 'Programador', 'Sistemas', 20),
-(8, 10, 'Conserje', 'Mantenimiento', 5),
-(9, 11, 'Contador', 'Finanzas', 10),
-(10, 12, 'Programador', 'Sistemas', 26);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudades`
+-- Estructura de tabla para la tabla `ciudades`
 --
 
 DROP TABLE IF EXISTS `ciudades`;
@@ -67,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `ciudades` (
 ) ENGINE=InnoDB AUTO_INCREMENT=523 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `ciudades`
+-- Volcado de datos para la tabla `ciudades`
 --
 
 INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
@@ -573,7 +561,7 @@ INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `direccion`
+-- Estructura de tabla para la tabla `direccion`
 --
 
 DROP TABLE IF EXISTS `direccion`;
@@ -582,7 +570,7 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   `usuario_id` int NOT NULL,
   `estado` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `municipio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `parroquia` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `parroquia` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ciudad` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `calle` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `zip` int NOT NULL,
@@ -591,22 +579,10 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   KEY `usuario_id` (`usuario_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `direccion`
---
-
-INSERT INTO `direccion` (`id`, `usuario_id`, `estado`, `municipio`, `parroquia`, `ciudad`, `calle`, `zip`, `vivienda`) VALUES
-(5, 1, '14', '241', '648', '', '10', 1000, 'Apartamento'),
-(6, 7, '14', '241', '648', '', '25', 1001, 'Casa'),
-(7, 9, '14', '241', '648', '', 'La asuncion', 1002, 'Casa'),
-(8, 10, '14', '241', '648', '', 'Azul', 1003, 'Apartamento'),
-(9, 11, '14', '241', '648', '', 'Verde', 1004, 'Casa'),
-(10, 12, '3', '33', '99', '', 'negro', 7203, 'Casa');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estados`
+-- Estructura de tabla para la tabla `estados`
 --
 
 DROP TABLE IF EXISTS `estados`;
@@ -618,7 +594,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `estados`
+-- Volcado de datos para la tabla `estados`
 --
 
 INSERT INTO `estados` (`id_estado`, `estado`, `iso_3166-2`) VALUES
@@ -651,7 +627,7 @@ INSERT INTO `estados` (`id_estado`, `estado`, `iso_3166-2`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `municipios`
+-- Estructura de tabla para la tabla `municipios`
 --
 
 DROP TABLE IF EXISTS `municipios`;
@@ -664,7 +640,7 @@ CREATE TABLE IF NOT EXISTS `municipios` (
 ) ENGINE=InnoDB AUTO_INCREMENT=463 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `municipios`
+-- Volcado de datos para la tabla `municipios`
 --
 
 INSERT INTO `municipios` (`id_municipio`, `id_estado`, `municipio`) VALUES
@@ -1007,7 +983,7 @@ INSERT INTO `municipios` (`id_municipio`, `id_estado`, `municipio`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parroquias`
+-- Estructura de tabla para la tabla `parroquias`
 --
 
 DROP TABLE IF EXISTS `parroquias`;
@@ -1020,7 +996,7 @@ CREATE TABLE IF NOT EXISTS `parroquias` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1139 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `parroquias`
+-- Volcado de datos para la tabla `parroquias`
 --
 
 INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
@@ -2166,7 +2142,7 @@ INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registros`
+-- Estructura de tabla para la tabla `registros`
 --
 
 DROP TABLE IF EXISTS `registros`;
@@ -2180,23 +2156,10 @@ CREATE TABLE IF NOT EXISTS `registros` (
   KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `registros`
---
-
-INSERT INTO `registros` (`id`, `usuario_id`, `entrada`, `salida`, `horas_trabajadas`) VALUES
-(1, 1, '2024-12-11 05:38:49', '2024-12-11 09:39:04', 5.000),
-(3, 1, '2024-12-11 13:30:08', '2024-12-11 13:30:13', 0.001),
-(4, 7, '2024-12-02 07:30:08', '2024-12-02 17:30:13', 9.500),
-(5, 9, '2024-12-02 07:30:08', '2024-12-02 15:30:13', 7.500),
-(6, 10, '2024-12-04 07:30:08', '2024-12-04 15:30:13', 8.500),
-(7, 11, '2024-12-10 07:30:08', '2024-12-10 15:30:13', 8.000),
-(8, 1, '2024-12-11 13:42:48', '2024-12-11 13:43:10', 0.006);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -2209,6 +2172,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `telefono` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `cara` json NOT NULL,
   `fecha_ingreso` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cedula` (`cedula`),
@@ -2216,53 +2180,41 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `tipo_usuario`, `nombre`, `apellido`, `cedula`, `email`, `telefono`, `password`, `fecha_ingreso`) VALUES
-(1, 'rrhh', 'admin', 'admin', 123, 'admin@gmail.com', '123', '0', '2024-12-11'),
-(7, 'rrhh', 'Pepito', 'Perez', 1234, 'pepito@gmail.com', '04121234567', '0', '2023-11-06'),
-(9, 'empleado', 'Juan', 'Perez', 12345, 'juan@gmail.com', '04121234564', '0', '2023-04-10'),
-(10, 'empleado', 'Sebastian', 'Perez', 123456, 'sebastian@gmail.com', '04121234560', '0', '2023-09-07'),
-(11, 'empleado', 'Carlos', 'Perez', 1234567, 'carlos@gmail.com', '04121234577', '0', '2023-12-08'),
-(12, 'rrhh', 'Angel', 'Cepeda', 7777, 'angel@gmail.com', '0412777777', '0', '2024-12-11');
-
---
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `cargos`
+-- Filtros para la tabla `cargos`
 --
 ALTER TABLE `cargos`
   ADD CONSTRAINT `usuario_id_on_cargos_foreign_on_id_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `ciudades`
+-- Filtros para la tabla `ciudades`
 --
 ALTER TABLE `ciudades`
   ADD CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `direccion`
+-- Filtros para la tabla `direccion`
 --
 ALTER TABLE `direccion`
   ADD CONSTRAINT `usuario_id_on_direccion_foreign_id_on_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `municipios`
+-- Filtros para la tabla `municipios`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `municipios_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `parroquias`
+-- Filtros para la tabla `parroquias`
 --
 ALTER TABLE `parroquias`
   ADD CONSTRAINT `parroquias_ibfk_1` FOREIGN KEY (`id_municipio`) REFERENCES `municipios` (`id_municipio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `registros`
+-- Filtros para la tabla `registros`
 --
 ALTER TABLE `registros`
   ADD CONSTRAINT `usuario_id_of_registros_is_id_of_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;

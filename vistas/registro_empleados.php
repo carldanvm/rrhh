@@ -85,6 +85,14 @@
                                 <input class="form-control" type="date" id="fecha_ingreso" name="fecha_ingreso" required
                                     value="<?php echo isset($_SESSION['datos_form']['fecha_ingreso']) ? $_SESSION['datos_form']['fecha_ingreso'] : ''; ?>">
                             </div>
+
+                            <div class="mb-3">
+                                <label for="imagen" class="form-label">Imagen del rostro del empleado (foto actual)</label>
+                                <input class="form-control" type="file" id="imagen" name="imagen" accept="image/*" required>
+                                <input type="hidden" id="descriptor_facial" name="descriptor_facial" required>
+                                <div id="face-status" class="form-text mt-2"></div>
+                            </div>
+
                         </div>
 
                         <!-- Paso 2: Datos de dirección -->
@@ -165,7 +173,7 @@
 
                     <div class="card-footer d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary" id="prev-step" disabled>Anterior</button>
-                        <button type="button" class="btn btn-primary" id="next-step">Siguiente</button>
+                        <button type="button" class="btn btn-primary" id="next-step" disabled>Siguiente</button>
                         <button type="submit" class="btn btn-success d-none" id="submit-form">Registrar</button>
                     </div>
                 </div>
@@ -174,6 +182,8 @@
     </div>
 </div>
 
+<script src="js/libs/face-api.min.js"></script>
+<script src="js/face-recognition.js"></script>
 <script src="js/selectorDirecciones.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

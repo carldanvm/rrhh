@@ -1,5 +1,5 @@
 const model_url = 'js/libs/models';
-let selectedFile = null;
+const nextButton = document.getElementById('next-step');
 
 // Load all required models
 Promise.all([
@@ -12,31 +12,28 @@ Promise.all([
 });
 
 async function initialize() {
-    const imageUpload = document.getElementById('imageUpload');
-    const captureButton = document.getElementById('capture');
-    const faceDataDiv = document.getElementById('faceData');
+    const imagenInput = document.getElementById('imagen');
+    const statusReconocimiento = document.getElementById('face-status');
 
-    imageUpload.addEventListener('change', async (e) => {
+    imagenInput.addEventListener('change', async (e) => {
         if (e.target.files.length > 0) {
-            selectedFile = e.target.files[0];
-            faceDataDiv.innerHTML = '<p>Imagen cargada. Haz clic en "Analizar Cara" para procesar.</p>';
+            // Mostrar mensaje de loading y deshabilitar el boton
+            statusReconocimiento.textContent = 'Procesando...';
+            nextButton.disabled = true;
+            const selectedFile = e.target.files[0];
+            await analyzeFace(selectedFile);
         }
     });
 
-    captureButton.addEventListener('click', analyzeFace);
 }
 
-async function analyzeFace() {
-    const faceDataDiv = document.getElementById('faceData');
-    
-    if (!selectedFile) {
-        faceDataDiv.innerHTML = '<p class="text-danger">Por favor, selecciona una imagen primero.</p>';
-        return;
-    }
+async function analyzeFace(imagenFile) {
+    const descriptorInput = document.getElementById('descriptor_facial');
+    const statusReconocimiento = document.getElementById('face-status');
 
     try {
         // Crear una imagen temporal para el procesamiento
-        const img = await faceapi.bufferToImage(selectedFile);
+        const img = await faceapi.bufferToImage(imagenFile);
         
         // Detectar cara en la imagen
         const detection = await faceapi.detectSingleFace(img)
@@ -44,23 +41,20 @@ async function analyzeFace() {
             .withFaceDescriptor();
 
         if (detection) {
-            // Obtener el descriptor facial y formatearlo para mostrar
+            // Obtener el descriptor facial
             const descriptor = Array.from(detection.descriptor);
-            const formattedDescriptor = descriptor.map(n => n.toFixed(7));
             
-            // Mostrar el descriptor
-            faceDataDiv.innerHTML = `
-                <p class="text-success mb-2">¡Cara detectada correctamente!</p>
-                <p class="mb-2">Descriptor facial (array de ${descriptor.length} números):</p>
-                <div style="max-height: 200px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 0.8em;">
-                    [${formattedDescriptor.join(',\n ')}]
-                </div>
-            `;
+            // Insertar el descriptor en el campo de entrada
+            descriptorInput.value = JSON.stringify(descriptor);
+
+            // Mostrar mensaje de exito y habilitar el boton
+            statusReconocimiento.textContent = 'Rostro detectado';
+            nextButton.disabled = false;
         } else {
-            faceDataDiv.innerHTML = '<p class="text-danger">No se detectó ninguna cara en la imagen. Por favor, intenta con otra imagen.</p>';
+            statusReconocimiento.textContent = 'No se detectó ninguna cara en la imagen. Por favor, intenta con otra imagen.';
         }
     } catch (error) {
         console.error('Error al analizar la cara:', error);
-        faceDataDiv.innerHTML = '<p class="text-danger">Error al procesar la imagen. Por favor, intenta con otra imagen.</p>';
+        statusReconocimiento.textContent = 'Error al procesar la imagen. Por favor, intenta con otra imagen.';
     }
 }

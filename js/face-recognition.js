@@ -1,111 +1,66 @@
 const model_url = 'js/libs/models';
+let selectedFile = null;
 
 // Load all required models
 Promise.all([
     faceapi.loadSsdMobilenetv1Model(model_url),
     faceapi.loadFaceLandmarkModel(model_url),
     faceapi.loadFaceRecognitionModel(model_url)
-]).then(initializeCamera)
+]).then(initialize)
 .catch(error => {
     console.error('Error loading face recognition models:', error);
 });
 
-async function initializeCamera() {
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
+async function initialize() {
+    const imageUpload = document.getElementById('imageUpload');
     const captureButton = document.getElementById('capture');
     const faceDataDiv = document.getElementById('faceData');
-    
-    try {
-        // Solicitar acceso a la cámara
-        const stream = await navigator.mediaDevices.getUserMedia({ 
-            video: true 
-        });
-        video.srcObject = stream;
-        
-        console.log('Cámara inicializada correctamente');
 
-        // Comenzar detección en tiempo real cuando el video esté listo
-        video.addEventListener('play', () => {
-            detectFaceRealTime();
-        });
-
-        // Agregar evento de captura de rostros
-        captureButton.addEventListener('click', () => captureFace());
-        
-    } catch (error) {
-        console.error('Error al acceder a la cámara:', error);
-    }
-}
-
-async function detectFaceRealTime() {
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const context = canvas.getContext('2d');
-
-    // Función recursiva para detección continua
-    async function detect() {
-        const detections = await faceapi.detectAllFaces(video)
-            .withFaceLandmarks()
-            .withFaceDescriptors();
-
-        // Limpiar canvas
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (detections.length > 0) {
-            // Redimensionar las detecciones al tamaño del canvas
-            const displaySize = { width: canvas.width, height: canvas.height };
-            const resizedDetections = faceapi.resizeResults(detections, displaySize);
-
-            // Dibujar rectángulo para cada cara detectada
-            resizedDetections.forEach(detection => {
-                const box = detection.detection.box;
-                context.strokeStyle = '#00ff00';
-                context.lineWidth = 2;
-                context.strokeRect(box.x, box.y, box.width, box.height);
-            });
+    imageUpload.addEventListener('change', async (e) => {
+        if (e.target.files.length > 0) {
+            selectedFile = e.target.files[0];
+            faceDataDiv.innerHTML = '<p>Imagen cargada. Haz clic en "Analizar Cara" para procesar.</p>';
         }
+    });
 
-        // Continuar el loop de detección
-        requestAnimationFrame(detect);
-    }
-
-    detect();
+    captureButton.addEventListener('click', analyzeFace);
 }
 
-async function captureFace() {
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
+async function analyzeFace() {
     const faceDataDiv = document.getElementById('faceData');
     
+    if (!selectedFile) {
+        faceDataDiv.innerHTML = '<p class="text-danger">Por favor, selecciona una imagen primero.</p>';
+        return;
+    }
+
     try {
-        // Detectar cara en el frame actual
-        const detections = await faceapi.detectAllFaces(video)
+        // Crear una imagen temporal para el procesamiento
+        const img = await faceapi.bufferToImage(selectedFile);
+        
+        // Detectar cara en la imagen
+        const detection = await faceapi.detectSingleFace(img)
             .withFaceLandmarks()
-            .withFaceDescriptors();
-        
-        if (detections.length === 0) {
-            faceDataDiv.innerHTML = 'No se detectó ninguna cara en la imagen';
-            return;
+            .withFaceDescriptor();
+
+        if (detection) {
+            // Obtener el descriptor facial y formatearlo para mostrar
+            const descriptor = Array.from(detection.descriptor);
+            const formattedDescriptor = descriptor.map(n => n.toFixed(7));
+            
+            // Mostrar el descriptor
+            faceDataDiv.innerHTML = `
+                <p class="text-success mb-2">¡Cara detectada correctamente!</p>
+                <p class="mb-2">Descriptor facial (array de ${descriptor.length} números):</p>
+                <div style="max-height: 200px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 0.8em;">
+                    [${formattedDescriptor.join(',\n ')}]
+                </div>
+            `;
+        } else {
+            faceDataDiv.innerHTML = '<p class="text-danger">No se detectó ninguna cara en la imagen. Por favor, intenta con otra imagen.</p>';
         }
-        
-        // Obtener el descriptor facial (array de 128 números)
-        const faceDescriptor = Array.from(detections[0].descriptor);
-        
-        // Guardar en localStorage para uso futuro
-        localStorage.setItem('faceDescriptor', JSON.stringify(faceDescriptor));
-        
-        // Mostrar el descriptor de manera legible
-        faceDataDiv.innerHTML = `
-            <p>Descriptor facial guardado (128 características):</p>
-            <div style="max-height: 150px; overflow-y: auto; font-family: monospace; font-size: 0.8em; background: #f8f9fa; padding: 10px; border-radius: 5px;">
-                [${faceDescriptor.map(n => n.toFixed(4)).join(', ')}]
-            </div>
-        `;
-        
-        console.log("Descriptor facial guardado:", faceDescriptor);
     } catch (error) {
-        console.error('Error al detectar la cara:', error);
-        faceDataDiv.innerHTML = 'Error al procesar la imagen';
+        console.error('Error al analizar la cara:', error);
+        faceDataDiv.innerHTML = '<p class="text-danger">Error al procesar la imagen. Por favor, intenta con otra imagen.</p>';
     }
 }

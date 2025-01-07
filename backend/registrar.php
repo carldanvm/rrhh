@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Datos del usuario
     $tipo_usuario = $_POST["tipo_usuario"];

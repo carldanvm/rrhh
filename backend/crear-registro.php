@@ -14,7 +14,7 @@
             $sql = "INSERT INTO registros (usuario_id, entrada) VALUES ($usuario_id, CURRENT_TIMESTAMP)";
             $result = mysqli_query($conn, $sql);
 
-            $respuesta = array('mensaje' => 'Entrada registrada exitosamente, fecha: ' . date('Y-m-d H:i:s'));
+            $respuesta = array('mensaje' => 'Entrada registrada exitosamente', 'fecha' => date('Y-m-d H:i:s'));
             echo json_encode($respuesta);
             exit();
         }
@@ -43,13 +43,17 @@
             $sql = "UPDATE registros SET horas_trabajadas = $horas_trabajadas WHERE id = $registro_id";
             $result = mysqli_query($conn, $sql);
 
-            $respuesta = array('mensaje' => 'Salida registrada exitosamente, fecha: ' . date('Y-m-d H:i:s'), 'horas_trabajadas' => $horas_trabajadas);
+            $respuesta = array('mensaje' => 'Salida registrada exitosamente', 'fecha' => date('Y-m-d H:i:s'), 'horas_trabajadas' => $horas_trabajadas);
             echo json_encode($respuesta);
             exit();
             
         }
 
         
+    }else{
+        http_response_code(400);
+        echo json_encode(["error" => "No se proporcionaron datos"]);
+        exit();
     }
 
 

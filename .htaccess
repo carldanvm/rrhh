@@ -8,15 +8,16 @@ RewriteEngine On
 RewriteBase /rrhh/
 
 # Permite acceso directo a archivos css, js, imágenes, etc
-RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|php|pdf)$ - [L]
+RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|php|pdf|json|weights|bin)$ - [L]
+
+# Permite acceso directo a los archivos de modelo de face-api
+RewriteRule ^js/libs/models/ - [L]
 
 # Desactiva la visualización del contenido de carpetas
 Options -Indexes
-
 
 # Si alguien accede a index.php en un subdirectorio, redirige a la raíz
 RewriteCond %{THE_REQUEST} /rrhh/(.+)/index\.php [NC]
 RewriteRule ^ /rrhh/index.php [L,R=301,QSA]
 
-# Redirige todas las demás peticiones al archivo index.php principal
-RewriteRule ^(.*)$ index.php [L,QSA]
+# Redirige todas las demás peticiones al archivo index.php principal{{ ... }}

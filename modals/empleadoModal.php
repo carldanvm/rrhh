@@ -33,6 +33,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-warning" onclick=editarEmpleado()>Editar empleado</button></button>
         <button type="button" class="btn btn-primary" onclick=generarConstancia()>Generar constancia</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>

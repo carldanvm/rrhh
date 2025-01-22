@@ -80,6 +80,7 @@
 
 <!-- Modales -->
 <?php include 'modals/empleadoModal.php'; ?>
+<?php include 'modals/editarEmpleadoModal.php'; ?>
 
 <?php include 'includes/footer.php'; ?>
 

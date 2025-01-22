@@ -165,7 +165,7 @@ try {
 
     // Generar nombre unico para el PDF
     $fecha = date('Y-m-d_H-i-s');
-    $pdfFile = 'constancias/constancia-trabajo_empleado_' . $empleadoId . '_' . $fecha . '.pdf';
+    $pdfFile = 'constancias/constancia-trabajo_empleado_' . $cedula . '_' . $fecha . '.pdf';
 
     // Guardar el PDF en el servidor
     file_put_contents($pdfFile, $dompdf->output());

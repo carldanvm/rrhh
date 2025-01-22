@@ -228,3 +228,73 @@ function enviarForm(id) {
         }
     });
 }
+
+function eliminarEmpleadoModal() {
+    const empleadoId = $('#empleadoModal').attr('data-empleado-id');
+    console.log(empleadoId);
+    
+    // Remover el foco de cualquier elemento dentro del modal
+    document.activeElement.blur();
+    
+    // Ocultar el empleadoModal usando el evento hidden.bs.modal
+    const empleadoModal = bootstrap.Modal.getInstance(document.getElementById('empleadoModal'));
+    empleadoModal.hide();
+    
+    // Esperar a que el primer modal se oculte completamente antes de mostrar el segundo
+    $('#empleadoModal').on('hidden.bs.modal', function () {
+        // Añadir el id al modal de eliminar
+        $('#eliminarModal').attr('data-empleado-id', empleadoId);
+        // Mostrar el eliminarModal
+        $('#eliminarModal').modal('show');
+        // Remover el event listener para evitar duplicados
+        $(this).off('hidden.bs.modal');
+    });
+}
+
+async function eliminarEmpleado() {
+    const empleadoId = $('#eliminarModal').attr('data-empleado-id');
+    let motivoSeleccionado = document.querySelector('input[name="motivo"]:checked').value;
+    if (motivoSeleccionado === 'otro') {
+        motivoSeleccionado = $('#otroMotivo').val()
+    }
+    await generarEliminarEmpleadoPdf(empleadoId, motivoSeleccionado);
+
+    
+}
+
+async function generarEliminarEmpleadoPdf(empleadoId, motivoSeleccionado){
+    $.ajax({
+        url: 'backend/eliminar-empleado-pdf.php',
+        type: 'POST',
+        data: {
+            empleadoId: empleadoId,
+            motivo: motivoSeleccionado
+        },
+        success: function(response) {
+            console.log(response.pdf_url);
+            if (response.success) {
+                // Abrir la constancia en una nueva ventana
+                window.open(response.pdf_url, '_blank');
+            }else{
+                alert('Error al generar la constancia' + response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            alert('Error del servidor al generar la constancia: ' + xhr.responseJSON.error);
+        }
+    })
+}
+
+// Manejo de radio buttons en el modal de eliminar
+document.querySelectorAll('input[name="motivo"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const otroInput = document.getElementById('otroInput');
+        if (this.value === 'otro') {
+            otroInput.style.display = 'block';
+        } else {
+            otroInput.style.display = 'none';
+            document.getElementById('otroMotivo').value = '';
+        }
+    });
+});

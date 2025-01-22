@@ -81,6 +81,7 @@
 <!-- Modales -->
 <?php include 'modals/empleadoModal.php'; ?>
 <?php include 'modals/editarEmpleadoModal.php'; ?>
+<?php include 'modals/eliminarModal.php'; ?>
 
 <?php include 'includes/footer.php'; ?>
 

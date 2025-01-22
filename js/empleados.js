@@ -12,7 +12,7 @@ function generarConstancia(){
             console.log(response.pdf_url);
             if (response.success) {
                 // Abrir la constancia en una nueva ventana
-                window.open(response.pdf_url, '_blank');
+                window.open(response.pdf_url, '_blank', 'noopener,noreferrer');
             }else{
                 alert('Error al generar la constancia' + response.error);
             }
@@ -257,33 +257,53 @@ async function eliminarEmpleado() {
     if (motivoSeleccionado === 'otro') {
         motivoSeleccionado = $('#otroMotivo').val()
     }
-    await generarEliminarEmpleadoPdf(empleadoId, motivoSeleccionado);
-
     
+    try {
+        // Primero generar el PDF
+        await generarEliminarEmpleadoPdf(empleadoId, motivoSeleccionado);
+        
+        // Luego eliminar el empleado
+        await $.ajax({
+            url: 'backend/eliminar-empleado.php',
+            type: 'POST',
+            data: {
+                empleadoId: empleadoId,
+            }
+        });
+
+        // Cerrar el modal y recargar la página
+        $('#eliminarModal').modal('hide');
+        location.reload();
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Ocurrió un error durante el proceso');
+    }
 }
 
 async function generarEliminarEmpleadoPdf(empleadoId, motivoSeleccionado){
-    $.ajax({
-        url: 'backend/eliminar-empleado-pdf.php',
-        type: 'POST',
-        data: {
-            empleadoId: empleadoId,
-            motivo: motivoSeleccionado
-        },
-        success: function(response) {
-            console.log(response.pdf_url);
-            if (response.success) {
-                // Abrir la constancia en una nueva ventana
-                window.open(response.pdf_url, '_blank');
-            }else{
-                alert('Error al generar la constancia' + response.error);
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: 'backend/eliminar-empleado-pdf.php',
+            type: 'POST',
+            data: {
+                empleadoId: empleadoId,
+                motivo: motivoSeleccionado
+            },
+            success: function(response) {
+                if (response.success) {
+                    window.open(response.pdf_url, '_blank', 'noopener,noreferrer');
+                    resolve(response);
+                } else {
+                    reject('Error al generar pdf: ' + response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                reject('Error del servidor al generar pdf: ' + xhr.responseJSON.error);
             }
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr.responseText);
-            alert('Error del servidor al generar la constancia: ' + xhr.responseJSON.error);
-        }
-    })
+        });
+    });
 }
 
 // Manejo de radio buttons en el modal de eliminar

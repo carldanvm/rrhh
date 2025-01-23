@@ -95,6 +95,10 @@ try {
     $imageData = base64_encode(file_get_contents($logoPath));
     $src = "data:image/png;base64," . $imageData;
 
+    /* Ruta de la imagen de la firma */
+    $firmaPath = realpath(dirname(__DIR__) . '/backend/firma/firma.png');
+    $firmaData = base64_encode(file_get_contents($firmaPath));
+    $srcFirma = "data:image/png;base64," . $firmaData;
 
     /* Configurar Dompdf */
     $options = new \Dompdf\Options();
@@ -145,6 +149,7 @@ try {
     <div class='signature'>
         <p>Atentamente,</p>
         <br>
+        <img src='$srcFirma' height='100' alt='$srcFirma'>
         <p><strong>Pepito Perez</strong></p>
         <p>Gerente de Recursos Humanos</p>
     </div>
@@ -177,7 +182,3 @@ try {
     echo json_encode(['error' => $e->getMessage()]);
     exit();
 }
-
-
-
-

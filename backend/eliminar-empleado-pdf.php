@@ -97,6 +97,11 @@ try {
     $logoPath = realpath(dirname(__DIR__) . '/img/logo.png');
     $imageData = base64_encode(file_get_contents($logoPath));
 
+    /* Ruta de la imagen de la firma */
+    $firmaPath = realpath(dirname(__DIR__) . '/backend/firma/firma.png');
+    $firmaData = base64_encode(file_get_contents($firmaPath));
+    $srcFirma = "data:image/png;base64," . $firmaData;
+
     // Generar nombre único para el archivo según el motivo
     $timestamp = date('Ymd_His');
     $tipo_documento = '';
@@ -135,7 +140,9 @@ try {
                 <table style='width: 100%; margin-top: 100px; border-collapse: collapse;'>
                     <tr style='vertical-align: top;'>
                         <td style='width: 50%; text-align: center; padding: 0 20px;'>
-                            <div style='border-bottom: 1px solid black; margin-bottom: 5px;'>&nbsp;</div>
+                            <div style='border-bottom: 1px solid black; margin-bottom: 5px;'>
+                                <img src='$srcFirma' style='height: 60px; margin-bottom: -20px;' alt='Firma RRHH'>
+                            </div>
                             <p style='margin: 5px 0;'>Departamento de Recursos Humanos</p>
                             <p style='margin: 5px 0;'>Fecha: $fecha_actual</p>
                         </td>
@@ -184,7 +191,9 @@ try {
                 <table style='width: 100%; margin-top: 100px; border-collapse: collapse;'>
                     <tr style='vertical-align: top;'>
                         <td style='width: 50%; text-align: center; padding: 0 20px;'>
-                            <div style='border-bottom: 1px solid black; margin-bottom: 5px;'>&nbsp;</div>
+                            <div style='border-bottom: 1px solid black; margin-bottom: 5px;'>
+                                <img src='$srcFirma' style='height: 60px; margin-bottom: -20px;' alt='Firma RRHH'>
+                            </div>
                             <p style='margin: 5px 0;'>Departamento de Recursos Humanos</p>
                             <p style='margin: 5px 0;'>Fecha: $fecha_actual</p>
                         </td>
@@ -234,7 +243,9 @@ try {
                 <table style='width: 100%; margin-top: 100px; border-collapse: collapse;'>
                     <tr style='vertical-align: top;'>
                         <td style='width: 50%; text-align: center; padding: 0 20px;'>
-                            <div style='border-bottom: 1px solid black; margin-bottom: 5px;'>&nbsp;</div>
+                            <div style='border-bottom: 1px solid black; margin-bottom: 5px;'>
+                                <img src='$srcFirma' style='height: 60px; margin-bottom: -20px;' alt='Firma RRHH'>
+                            </div>
                             <p style='margin: 5px 0;'>Departamento de Recursos Humanos</p>
                             <p style='margin: 5px 0;'>Fecha: $fecha_actual</p>
                         </td>

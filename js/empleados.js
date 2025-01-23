@@ -231,7 +231,6 @@ function enviarForm(id) {
 
 function eliminarEmpleadoModal() {
     const empleadoId = $('#empleadoModal').attr('data-empleado-id');
-    console.log(empleadoId);
     
     // Remover el foco de cualquier elemento dentro del modal
     document.activeElement.blur();
@@ -303,6 +302,78 @@ async function generarEliminarEmpleadoPdf(empleadoId, motivoSeleccionado){
                 reject('Error del servidor al generar pdf: ' + xhr.responseJSON.error);
             }
         });
+    });
+}
+
+function diasLibresModal(){
+    const empleadoId = $('#empleadoModal').attr('data-empleado-id');
+    
+    // Remover el foco de cualquier elemento dentro del modal
+    document.activeElement.blur();
+    
+    // Ocultar el empleadoModal usando el evento hidden.bs.modal
+    const empleadoModal = bootstrap.Modal.getInstance(document.getElementById('empleadoModal'));
+    empleadoModal.hide();
+    
+    // Esperar a que el primer modal se oculte completamente antes de mostrar el segundo
+    $('#empleadoModal').on('hidden.bs.modal', function () {
+        // Añadir el id al modal de dias libres
+        $('#diasLibresModal').attr('data-empleado-id', empleadoId);
+
+        // Inicializar daterangepicker
+        $('#daterange').daterangepicker({
+            locale: {
+                format: 'DD/MM/YYYY',
+                separator: ' - ',
+                applyLabel: 'Aplicar',
+                cancelLabel: 'Cancelar',
+                daysOfWeek: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+            }
+        });
+
+        // Mostrar el modal
+        $('#diasLibresModal').modal('show');
+        
+        // Remover el event listener para evitar duplicados
+        $(this).off('hidden.bs.modal');
+    });
+}
+
+async function asignarDiasLibres(){
+    const empleadoId = $('#diasLibresModal').attr('data-empleado-id');
+    const fechaInicio = $('#daterange').val().split(' - ')[0];
+    const fechaFin = $('#daterange').val().split(' - ')[1];
+
+    console.log('Enviando datos:', { empleadoId, fechaInicio, fechaFin }); // Debug
+
+    $.ajax({
+        url: 'backend/dias-libres.php',
+        type: 'POST',
+        data: {
+            empleadoId: empleadoId,
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin
+        },
+        success: function(response) {
+            console.log('Respuesta:', response); // Debug
+            try {
+                if (response.success) {
+                    $('#diasLibresModal').modal('hide');
+                    // Recargar la tabla
+                    location.reload();
+                } else {
+                    alert('Error: ' + (response.error || 'Error desconocido'));
+                }
+            } catch (e) {
+                console.error('Error al procesar respuesta:', e);
+                alert('Error al procesar la respuesta del servidor');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error AJAX:', error);
+            alert('Error al comunicarse con el servidor');
+        }
     });
 }
 

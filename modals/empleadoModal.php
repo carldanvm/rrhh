@@ -33,6 +33,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick=diasLibresModal()>Asignar dias libres</button>
         <button type="button" class="btn btn-danger" onclick=eliminarEmpleadoModal()>Eliminar empleado</button></button>
         <button type="button" class="btn btn-warning" onclick=editarEmpleado()>Editar empleado</button></button>
         <button type="button" class="btn btn-primary" onclick=generarConstancia()>Generar constancia</button>

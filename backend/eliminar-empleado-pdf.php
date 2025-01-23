@@ -112,6 +112,7 @@ try {
             $html = "
             <html>
             <head>
+                <meta charset='UTF-8'>
                 <style>
                     body { font-family: Arial, sans-serif; line-height: 1.6; }
                     .header { text-align: center; margin-bottom: 20px; }
@@ -163,6 +164,7 @@ try {
             $html = "
             <html>
             <head>
+                <meta charset='UTF-8'>
                 <style>
                     body { font-family: Arial, sans-serif; line-height: 1.6; }
                     .header { text-align: center; margin-bottom: 20px; }
@@ -215,6 +217,7 @@ try {
             $html = "
             <html>
             <head>
+                <meta charset='UTF-8'>
                 <style>
                     body { font-family: Arial, sans-serif; line-height: 1.6; }
                     .header { text-align: center; margin-bottom: 20px; }

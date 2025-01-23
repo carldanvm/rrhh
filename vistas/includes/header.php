@@ -42,6 +42,10 @@
                         if (isset($_SESSION['logeado_id'])) {
 
                             echo '<li class="nav-item">
+                                <a class="nav-link" href="index.php?page=panel_rrhh">Panel RRHH</a>
+                              </li>';
+
+                            echo '<li class="nav-item">
                                 <a class="nav-link" href="index.php?page=logout">Cerrar sesión</a>
                               </li>';
                         } else {

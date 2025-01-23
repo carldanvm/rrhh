@@ -1,5 +1,6 @@
 ## Ignorar las costancias generadas
 backend/constancias/*.pdf
+backend/eliminar-pdf/*.pdf
 
 test.jpg
 

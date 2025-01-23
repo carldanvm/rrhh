@@ -59,6 +59,9 @@
                                 Monto a cobrar
                             </th>
                             <th scope="col">
+                                Inasistencias
+                            </th>
+                            <th scope="col">
                                 Fecha de ingreso
                             </th>
                         </tr>

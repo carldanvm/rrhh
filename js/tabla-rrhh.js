@@ -34,6 +34,7 @@ function llenarTabla(response) {
                 <td>$${empleado.salario_base}</td>
                 <td>${empleado.horas_trabajadas}h</td>
                 <td>$${empleado.por_cobrar}</td>
+                <td>${empleado.inasistencias}</td>
                 <td>${empleado.fecha_ingreso}</td>
             </tr>
             

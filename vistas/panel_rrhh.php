@@ -38,12 +38,22 @@ include "includes/header.php";
             ?>
 
             <!-- TITULO y BOTON PARA REGISTRAR EMPLEADO -->
-            <div class="d-flex align-items-center mb-2">
-                <h1 class="text-center">Empleados</h1>
-                <button id="btn-registrar-empleado" type="button" class="btn btn-primary ms-3 p-1" onclick="window.location.href='index.php?page=registro_empleados'">
-                    Registrar empleado
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h1 class="mb-0">Información empleados</h1>
+                    <p class="text-muted mb-0">
+                        <?php 
+                        $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                        echo $meses[date('n')-1] . ' ' . date('Y'); 
+                        ?>
+                    </p>
+                </div>
+                <button id="btn-registrar-empleado" type="button" class="btn btn-primary p-2" onclick="window.location.href='index.php?page=registro_empleados'">
+                    <img src="icon/anadir.png" alt="Añadir" class="me-1" style="width: 20px; height: 20px;"> Registrar empleado
                 </button>
             </div>
+
+            <hr class="mb-4" style="border-color: #3d3d3d;">
 
             <div class="table-responsive">
                 <table id="tabla-empleados" class="table table-hover table-striped align-middle">

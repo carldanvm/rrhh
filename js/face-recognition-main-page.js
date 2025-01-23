@@ -30,10 +30,12 @@ function euclideanDistance(descriptor1, descriptor2) {
 // Función para verificar si un descriptor es similar a los existentes
 function isSimilarToExisting(newDescriptor) {
   if (faceDescriptors.length === 0) return true;
-  
+
   // Comprobar la similitud con todos los descriptores existentes
-  return faceDescriptors.every(existingDescriptor => 
-    euclideanDistance(newDescriptor, existingDescriptor) < DESCRIPTOR_THRESHOLD
+  return faceDescriptors.every(
+    (existingDescriptor) =>
+      euclideanDistance(newDescriptor, existingDescriptor) <
+      DESCRIPTOR_THRESHOLD
   );
 }
 
@@ -42,7 +44,9 @@ async function startFaceRecognition() {
     videoElement = document.getElementById("videoElement");
     canvasElement = document.getElementById("canvasElement");
     const videoContainer = document.getElementById("video-container");
-    const formularioRegistro = document.getElementById("formulario-registro-horas");
+    const formularioRegistro = document.getElementById(
+      "formulario-registro-horas"
+    );
     const statusDisplay = document.getElementById("status-display");
 
     // Ocultar el formulario y mostrar el contenedor de video
@@ -60,7 +64,7 @@ async function startFaceRecognition() {
         width: { ideal: 640 },
         height: { ideal: 480 },
         facingMode: "user",
-        frameRate: { ideal: 30 } // Agregado frameRate para mejor fluidez
+        frameRate: { ideal: 30 }, // Agregado frameRate para mejor fluidez
       },
     });
 
@@ -71,7 +75,7 @@ async function startFaceRecognition() {
     await new Promise((resolve) => {
       videoElement.onloadeddata = async () => {
         await videoElement.play();
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 100));
         console.log("Video cargado y reproduciendo");
         resolve();
       };
@@ -88,10 +92,10 @@ async function startFaceRecognition() {
     function drawFaceDetection(detection, displaySize) {
       const canvas = document.getElementById("canvasElement");
       const context = canvas.getContext("2d");
-      
+
       // Limpiar el canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       // Dibujar el rectángulo
       const box = detection.detection.box;
       context.beginPath();
@@ -99,7 +103,7 @@ async function startFaceRecognition() {
       context.strokeStyle = "#00ff00";
       context.rect(box.x, box.y, box.width, box.height);
       context.stroke();
-      
+
       // Dibujar los landmarks
       const landmarks = detection.landmarks;
       context.fillStyle = "#00ff00";
@@ -112,7 +116,8 @@ async function startFaceRecognition() {
 
     // Iniciar la detección facial
     const startDetection = async () => {
-      if (videoElement.paused || videoElement.ended || processingComplete) return;
+      if (videoElement.paused || videoElement.ended || processingComplete)
+        return;
 
       try {
         console.log("Iniciando detección facial");
@@ -124,21 +129,25 @@ async function startFaceRecognition() {
 
         if (detection && !processingComplete) {
           const descriptor = detection.descriptor;
-          
+
           // Dibujar el rectángulo en el rostro
-          const displaySize = { width: videoElement.width, height: videoElement.height };
+          const displaySize = {
+            width: videoElement.width,
+            height: videoElement.height,
+          };
           drawFaceDetection(detection, displaySize);
-          
+
           // Verificar si el descriptor es similar a los existentes
           if (isSimilarToExisting(descriptor)) {
             faceDescriptors.push(descriptor);
-            document.getElementById("status-display").textContent = 
-              `Rostro detectado (${faceDescriptors.length}/${REQUIRED_DESCRIPTORS})`;
-            
+            document.getElementById(
+              "status-display"
+            ).textContent = `Rostro detectado (${faceDescriptors.length}/${REQUIRED_DESCRIPTORS})`;
+
             // Si tenemos suficientes descriptores similares
             if (faceDescriptors.length >= REQUIRED_DESCRIPTORS) {
               processingComplete = true;
-              document.getElementById("status-display").textContent = 
+              document.getElementById("status-display").textContent =
                 "¡Captura completada!";
               await processDetection(faceDescriptors);
             }
@@ -159,7 +168,6 @@ async function startFaceRecognition() {
     };
 
     requestAnimationFrame(startDetection);
-
   } catch (error) {
     console.error("Error al acceder a la cámara:", error);
     document.getElementById("status-display").textContent =
@@ -191,9 +199,10 @@ function stopFaceRecognition() {
     .getElementById("formulario-registro-horas")
     .classList.remove("d-none");
   document.getElementById("video-container").classList.add("d-none");
-  
+
   // Reiniciar el mensaje de estado
-  document.getElementById("status-display").textContent = "Posicione su rostro frente a la cámara";
+  document.getElementById("status-display").textContent =
+    "Posicione su rostro frente a la cámara";
 }
 
 async function processDetection(descriptors) {
@@ -203,48 +212,128 @@ async function processDetection(descriptors) {
   validarRostro(descriptors);
 }
 
-async function validarRostro(descriptors){
-    $.ajax({
-        url: 'backend/validar-rostro.php',
-        type: 'POST',
-        data: {
-            descriptores: descriptors
-        },
-        success: function(response) {
-            // Verificar si la respuesta fue exitosa
-            if (response.success) {
-                console.log(response);
-                // Crear mensaje de bienvenida o despedida según el tipo de registro
-                const mensaje = response.tipo_registro === "entrada" 
-                    ? "Bienvenido " + response.usuario_nombre + " " + response.usuario_apellido + "."
-                    : "Hasta luego " + response.usuario_nombre + " " + response.usuario_apellido + ".";
-                // Mostrar mensaje de éxito
-                $("#mensaje-exito-horas").removeClass("alert-danger d-none").addClass("alert-success")
-                    .text(mensaje);
-                // Ocultar botón de inicio de reconocimiento facial
-                $("#startFaceRecognition").addClass("d-none");
-                // Mostrar y configurar botón de confirmación
-                $("#confirmar-registro")
-                    .removeClass("d-none")
-                    .attr("onclick", `confirmarRegistro(${response.usuario_id}, '${response.tipo_registro}')`)
-                    .text("Confirmar "+ response.tipo_registro);
-                // Mostrar y configurar botón de cancelación
-                $("#cancelar-registro")
-                    .removeClass("d-none")
-                    .text("Cancelar");
-                // Ocultar título de registro
-                $("#titulo-registro").addClass("d-none");
-            } else {
-                // Si la respuesta no fue exitosa, mostrar mensaje de error
-                console.log(response);
-                $("#mensaje-exito-horas").removeClass("alert-success d-none").addClass("alert-danger")
-                    .text("Usuario no identificado.");
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error en la validación:", error);
-            $("#mensaje-exito-horas").removeClass("alert-success d-none").addClass("alert-danger")
-                .text("Error en el sistema. Por favor, intente nuevamente");
-        }
-    });
+async function validarRostro(descriptors) {
+  $.ajax({
+    url: "backend/validar-rostro.php",
+    type: "POST",
+    data: {
+      descriptores: descriptors,
+    },
+    success: function (response) {
+      // Verificar si la respuesta fue exitosa
+      if (response.success) {
+        console.log(response);
+        // Crear mensaje de bienvenida o despedida según el tipo de registro
+        const mensaje =
+          response.tipo_registro === "entrada"
+            ? "Bienvenido " +
+              response.usuario_nombre +
+              " " +
+              response.usuario_apellido +
+              "."
+            : "Hasta luego " +
+              response.usuario_nombre +
+              " " +
+              response.usuario_apellido +
+              ".";
+        // Mostrar mensaje de éxito
+        $("#mensaje-exito-horas")
+          .removeClass("alert-danger d-none")
+          .addClass("alert-success")
+          .text(mensaje);
+        // Ocultar botón de inicio de reconocimiento facial
+        $("#startFaceRecognition").addClass("d-none");
+        // Mostrar y configurar botón de confirmación
+        $("#confirmar-registro")
+          .removeClass("d-none")
+          .attr(
+            "onclick",
+            `confirmarRegistro(${response.usuario_id}, '${response.tipo_registro}')`
+          )
+          .text("Confirmar " + response.tipo_registro);
+        // Mostrar y configurar botón de cancelación
+        $("#cancelar-registro").removeClass("d-none").text("Cancelar");
+        // Ocultar título de registro
+        $("#titulo-registro").addClass("d-none");
+      } else {
+        // Si la respuesta no fue exitosa, mostrar mensaje de error
+        console.log(response);
+        $("#mensaje-exito-horas")
+          .removeClass("alert-success d-none")
+          .addClass("alert-danger")
+          .text("Usuario no identificado.");
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la validación:", error);
+      $("#mensaje-exito-horas")
+        .removeClass("alert-success d-none")
+        .addClass("alert-danger")
+        .text("Error en el sistema. Por favor, intente nuevamente");
+    },
+  });
+}
+
+function toggleFormulario() {
+  document.getElementById("reconocimiento-facial").classList.toggle("d-none");
+  document.getElementById("registro-manual").classList.toggle("d-none");
+  // Si facial esta oculto mostrar texto en el boton
+  if (
+    document
+      .getElementById("reconocimiento-facial")
+      .classList.contains("d-none")
+  ) {
+    document.getElementById("toggle-form").textContent =
+      "Reconocimiento facial";
+  } else {
+    document.getElementById("toggle-form").textContent = "Registro manual";
+  }
+}
+
+function registroManual() {
+  const cedula = document.getElementById("cedula").value;
+  const password = document.getElementById("password").value;
+
+  if (cedula === "" || password === "") {
+    alert("Por favor, complete todos los campos");
+    return;
+  }
+
+  $.ajax({
+    url: "backend/comenzar-registro.php",
+    type: "POST",
+    data: {
+      cedula: cedula,
+      password: password,
+    },
+    success: function (response) {
+      // Aquí puedes manejar la respuesta del servidor
+      console.log(response);
+
+      //Deshabilitar el boton de registro manual y los campos cedula y contraseña
+      $("#registroManual").prop("disabled", true);
+      $("#cedula").prop("disabled", true);
+      $("#password").prop("disabled", true);
+
+      // Mostrar mensaje de éxito
+      $("#mensaje-exito-horas")
+        .removeClass("alert-danger d-none")
+        .addClass("alert-success")
+        .html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+              ${
+                response.registro === "entrada"
+                  ? `Bienvenido ${response.nombre}`
+                  : `Hasta luego ${response.nombre}`
+              }
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>`);
+
+      setTimeout(function () {
+        location.reload();
+      }, 2000);
+    },
+    error: function (xhr, status, error) {
+      console.log(xhr.responseText);
+    },
+  });
 }

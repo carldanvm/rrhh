@@ -209,3 +209,13 @@ footer{
 #detection-status {
     min-height: 100px; /* Evitar saltos en el layout */
 }
+
+.alert-floating {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 300px;
+    max-width: 90%;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}

@@ -1,4 +1,11 @@
-<?php include "includes/header.php"; ?>
+<?php 
+// Asegurarse de que la sesión esté iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include "includes/header.php"; 
+?>
 <div class="container-fluid bg-light px-5">
     <div class="row full-page">
         <!-- Contenido principal -->
@@ -7,10 +14,24 @@
             <!-- Mensaje de exito al registrar empleado -->
             <?php
             if (isset($_SESSION['mensaje'])) {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                echo '<div class="alert alert-success alert-dismissible fade show alert-floating" role="alert" id="mensaje-alerta">';
                 echo $_SESSION['mensaje'];
                 echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
                 echo '</div>';
+                
+                // Script mejorado para la animación de cierre
+                echo '<script>
+                    setTimeout(function() {
+                        var alert = document.getElementById("mensaje-alerta");
+                        if (alert) {
+                            alert.style.transition = "opacity 0.3s ease-out";
+                            alert.style.opacity = "0";
+                            setTimeout(function() {
+                                alert.remove();
+                            }, 300);
+                        }
+                    }, 2000);
+                </script>';
 
                 unset($_SESSION['mensaje']);
             }

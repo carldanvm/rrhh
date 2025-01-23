@@ -223,8 +223,13 @@ function enviarForm(id) {
         url: 'backend/editar-empleado.php',
         type: 'POST',
         data: formData,
-        complete: function() {
+        success: function(response) {
+            // Recargar la tabla o contenido necesario
             location.reload();
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+            alert('Error al actualizar el empleado');
         }
     });
 }

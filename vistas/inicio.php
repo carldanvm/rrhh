@@ -45,7 +45,7 @@
                                 </div>
                                 <div id="error-registro-hora" class="text-danger d-none"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
                                 <div class="d-flex justify-content-start">
-                                    <button class="btn btn-link text-decoration-none p-0" id="toggle-form" onclick="toggleFormulario()">Registrar con contraseña</button>
+                                    <button class="btn btn-link text-decoration-none p-0" id="toggle-form" onclick="toggleFormulario()">Registro manual</button>
                                 </div>
                             </div>
 

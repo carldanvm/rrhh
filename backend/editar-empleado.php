@@ -141,12 +141,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Redireccionar al panel_rrhh con un mensaje de éxito
         $_SESSION['mensaje'] = "Usuario actualizado exitosamente";
         unset($_SESSION['datos_form']);
-        header("location: ../index.php?page=panel_rrhh");
+        exit();
 
     } catch (Exception $e) {
         // Si algo salió mal, revertir los cambios
         mysqli_rollback($conn);
         $_SESSION['error'] = "Error al actualizar: " . $e->getMessage();
         header("location: ../index.php?page=panel_rrhh");
+        exit();
     }
 }

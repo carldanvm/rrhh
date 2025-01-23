@@ -15,15 +15,15 @@
             </div>
             <div class="mb-2">
                 <label for="edit-nombre" class="form-label"><strong>Nombre:</strong></label>
-                <input type="text" id="edit-nombre" name="nombre" class="form-control" required>
+                <input type="text" id="edit-nombre" name="nombre" class="form-control" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras" required oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
             </div>
             <div class="mb-2">
                 <label for="edit-apellido" class="form-label"><strong>Apellido:</strong></label>
-                <input type="text" id="edit-apellido" name="apellido" class="form-control" required>
+                <input type="text" id="edit-apellido" name="apellido" class="form-control" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras" required oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
             </div>
             <div class="mb-2">
                 <label for="edit-cedula" class="form-label"><strong>Cedula:</strong></label>
-                <input type="text" id="edit-cedula" name="cedula" class="form-control" required>
+                <input type="text" id="edit-cedula" name="cedula" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <div class="mb-2">
                 <label for="edit-email" class="form-label"><strong>Email:</strong></label>
@@ -31,7 +31,7 @@
             </div>
             <div class="mb-2">
                 <label for="edit-telefono" class="form-label"><strong>Telefono:</strong></label>
-                <input type="tel" id="edit-telefono" name="telefono" class="form-control" required>
+                <input type="tel" id="edit-telefono" name="telefono" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <div class="mb-2">
                 <label for="edit-fecha-registro" class="form-label"><strong>Fecha de registro:</strong></label>
@@ -49,7 +49,7 @@
             </div>
             <div class="mb-2">
                 <label for="edit-salario" class="form-label"><strong>Salario:</strong></label>
-                <input type="number" id="edit-salario" name="salario_base" class="form-control" required>
+                <input type="number" id="edit-salario" name="salario_base" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
 
             <h5 class="mb-3 text-primary border-bottom pb-2 mt-3">Dirección</h5>
@@ -77,7 +77,7 @@
             </div>
             <div class="mb-2">
                 <label for="edit-codigo-postal" class="form-label"><strong>Código postal:</strong></label>
-                <input type="text" id="edit-codigo-postal" name="zip" class="form-control" required>
+                <input type="text" id="edit-codigo-postal" name="zip" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <div class="mb-2">
                 <label for="edit-tipo-vivienda" class="form-label"><strong>Tipo de vivienda:</strong></label>

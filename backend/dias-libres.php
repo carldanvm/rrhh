@@ -40,6 +40,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("iss", $empleadoId, $fechaInicio, $fechaFin);
 
 if ($stmt->execute()) {
+    $_SESSION['mensaje'] = 'Días libres asignados correctamente';
     echo json_encode(['success' => true, 'message' => 'Días libres asignados correctamente']);
 } else {
     echo json_encode(['success' => false, 'error' => $conn->error]);

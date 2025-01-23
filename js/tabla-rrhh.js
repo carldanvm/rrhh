@@ -32,8 +32,9 @@ function llenarTabla(response) {
                 <td>${empleado.email}</td>
                 <td>${empleado.cargo}</td>
                 <td>$${empleado.salario_base}</td>
-                <td>${empleado.horas_trabajadas}h</td>
-                <td>$${empleado.por_cobrar}</td>
+                <td>${Number(empleado.horas_trabajadas).toFixed(1)}h</td>
+                <td>$${Number(empleado.por_cobrar).toFixed(1)}</td>
+                <td>${empleado.inasistencias}</td>
                 <td>${empleado.fecha_ingreso}</td>
             </tr>
             

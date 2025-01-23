@@ -18,21 +18,35 @@
                             <h4 class="card-title text-dark mb-4" id="titulo-registro">Registre aquí su entrada o salida</h4>
                             <div id="formulario-registro-horas" class="d-flex flex-column gap-3">
                                 <div class="d-flex flex-column gap-3 align-items-center">
-                                    <button type="button" id="startFaceRecognition" onclick="startFaceRecognition()" class="btn btn-primary boton-registrar">Realizar registro</button>
+                                    <div id="reconocimiento-facial">
+                                        <button type="button" id="startFaceRecognition" onclick="startFaceRecognition()" class="btn btn-primary boton-registrar">Realizar registro</button>
 
-                                    <div class="d-flex justify-content-center gap-3 w-100">
-                                        <button type="button" id="confirmar-registro" class="btn btn-success btn-lg fw-bold shadow-sm flex-grow-1 d-none">
-                                            Confirmar registro
-                                        </button>
-                                        <button type="button" id="cancelar-registro" onclick="location.reload()" class="btn btn-outline-danger d-none">
-                                            Cancelar
-                                        </button>
+                                        <div class="d-flex justify-content-center gap-3 w-100">
+                                            <button type="button" id="confirmar-registro" class="btn btn-success btn-lg fw-bold shadow-sm flex-grow-1 d-none">
+                                                Confirmar registro
+                                            </button>
+                                            <button type="button" id="cancelar-registro" onclick="location.reload()" class="btn btn-outline-danger d-none">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="registro-manual" class="d-none d-flex flex-column gap-3">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="cedula" placeholder="Cédula" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="registroManual" onclick="registroManual()">Realizar registro</button>
                                     </div>
                                 </div>
                                 <div id="mensaje-exito-horas" class="text-success mt-3 d-none">
                                     <!-- Aqui se mostrara el mensaje de exito si es necesario -->
                                 </div>
                                 <div id="error-registro-hora" class="text-danger d-none"><!-- Aqui se mostrara mensaje de error si es necesario --></div>
+                                <div class="d-flex justify-content-start">
+                                    <button class="btn btn-link text-decoration-none p-0" id="toggle-form" onclick="toggleFormulario()">Registro manual</button>
+                                </div>
                             </div>
 
 

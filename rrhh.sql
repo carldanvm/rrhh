@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 07-01-2025 a las 00:43:10
--- Versión del servidor: 9.1.0
--- Versión de PHP: 8.3.14
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 23-01-2025 a las 06:15:29
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,16 +27,13 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `cargos`
 --
 
-DROP TABLE IF EXISTS `cargos`;
-CREATE TABLE IF NOT EXISTS `cargos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
-  `cargo` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `area` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `salario_base` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `cargos` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `cargo` varchar(30) NOT NULL,
+  `area` varchar(30) NOT NULL,
+  `salario_base` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -44,15 +41,12 @@ CREATE TABLE IF NOT EXISTS `cargos` (
 -- Estructura de tabla para la tabla `ciudades`
 --
 
-DROP TABLE IF EXISTS `ciudades`;
-CREATE TABLE IF NOT EXISTS `ciudades` (
-  `id_ciudad` int NOT NULL AUTO_INCREMENT,
-  `id_estado` int NOT NULL,
+CREATE TABLE `ciudades` (
+  `id_ciudad` int(11) NOT NULL,
+  `id_estado` int(11) NOT NULL,
   `ciudad` varchar(200) NOT NULL,
-  `capital` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_ciudad`),
-  KEY `id_estado` (`id_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=523 DEFAULT CHARSET=utf8mb3;
+  `capital` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `ciudades`
@@ -561,23 +555,33 @@ INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `dias_libres`
+--
+
+CREATE TABLE `dias_libres` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_final` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `direccion`
 --
 
-DROP TABLE IF EXISTS `direccion`;
-CREATE TABLE IF NOT EXISTS `direccion` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
-  `estado` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `municipio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `parroquia` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `ciudad` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `calle` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `zip` int NOT NULL,
-  `vivienda` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `direccion` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `estado` text NOT NULL,
+  `municipio` text NOT NULL,
+  `parroquia` varchar(100) NOT NULL,
+  `ciudad` text NOT NULL,
+  `calle` varchar(30) NOT NULL,
+  `zip` int(11) NOT NULL,
+  `vivienda` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -585,13 +589,11 @@ CREATE TABLE IF NOT EXISTS `direccion` (
 -- Estructura de tabla para la tabla `estados`
 --
 
-DROP TABLE IF EXISTS `estados`;
-CREATE TABLE IF NOT EXISTS `estados` (
-  `id_estado` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `estados` (
+  `id_estado` int(11) NOT NULL,
   `estado` varchar(250) NOT NULL,
-  `iso_3166-2` varchar(4) NOT NULL,
-  PRIMARY KEY (`id_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
+  `iso_3166-2` varchar(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `estados`
@@ -630,14 +632,11 @@ INSERT INTO `estados` (`id_estado`, `estado`, `iso_3166-2`) VALUES
 -- Estructura de tabla para la tabla `municipios`
 --
 
-DROP TABLE IF EXISTS `municipios`;
-CREATE TABLE IF NOT EXISTS `municipios` (
-  `id_municipio` int NOT NULL AUTO_INCREMENT,
-  `id_estado` int NOT NULL,
-  `municipio` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_municipio`),
-  KEY `id_estado` (`id_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=463 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `municipios` (
+  `id_municipio` int(11) NOT NULL,
+  `id_estado` int(11) NOT NULL,
+  `municipio` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `municipios`
@@ -986,14 +985,11 @@ INSERT INTO `municipios` (`id_municipio`, `id_estado`, `municipio`) VALUES
 -- Estructura de tabla para la tabla `parroquias`
 --
 
-DROP TABLE IF EXISTS `parroquias`;
-CREATE TABLE IF NOT EXISTS `parroquias` (
-  `id_parroquia` int NOT NULL AUTO_INCREMENT,
-  `id_municipio` int NOT NULL,
-  `parroquia` varchar(250) NOT NULL,
-  PRIMARY KEY (`id_parroquia`),
-  KEY `id_municipio` (`id_municipio`)
-) ENGINE=InnoDB AUTO_INCREMENT=1139 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `parroquias` (
+  `id_parroquia` int(11) NOT NULL,
+  `id_municipio` int(11) NOT NULL,
+  `parroquia` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `parroquias`
@@ -2145,16 +2141,13 @@ INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
 -- Estructura de tabla para la tabla `registros`
 --
 
-DROP TABLE IF EXISTS `registros`;
-CREATE TABLE IF NOT EXISTS `registros` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
+CREATE TABLE `registros` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `entrada` datetime DEFAULT NULL,
   `salida` datetime DEFAULT NULL,
-  `horas_trabajadas` decimal(10,3) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `horas_trabajadas` decimal(10,3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2162,22 +2155,143 @@ CREATE TABLE IF NOT EXISTS `registros` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `tipo_usuario` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `apellido` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `cedula` int NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `telefono` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `cara` json NOT NULL,
-  `fecha_ingreso` date NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cedula` (`cedula`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `tipo_usuario` varchar(30) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `cedula` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefono` varchar(30) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `cara` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`cara`)),
+  `fecha_ingreso` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  ADD PRIMARY KEY (`id_ciudad`),
+  ADD KEY `id_estado` (`id_estado`);
+
+--
+-- Indices de la tabla `dias_libres`
+--
+ALTER TABLE `dias_libres`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_dias_libres_usuario` (`usuario_id`);
+
+--
+-- Indices de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `estados`
+--
+ALTER TABLE `estados`
+  ADD PRIMARY KEY (`id_estado`);
+
+--
+-- Indices de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  ADD PRIMARY KEY (`id_municipio`),
+  ADD KEY `id_estado` (`id_estado`);
+
+--
+-- Indices de la tabla `parroquias`
+--
+ALTER TABLE `parroquias`
+  ADD PRIMARY KEY (`id_parroquia`),
+  ADD KEY `id_municipio` (`id_municipio`);
+
+--
+-- Indices de la tabla `registros`
+--
+ALTER TABLE `registros`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id_of_registros_is_id_of_usuarios` (`usuario_id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cedula` (`cedula`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
+
+--
+-- AUTO_INCREMENT de la tabla `dias_libres`
+--
+ALTER TABLE `dias_libres`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `estados`
+--
+ALTER TABLE `estados`
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=463;
+
+--
+-- AUTO_INCREMENT de la tabla `parroquias`
+--
+ALTER TABLE `parroquias`
+  MODIFY `id_parroquia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1139;
+
+--
+-- AUTO_INCREMENT de la tabla `registros`
+--
+ALTER TABLE `registros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -2194,6 +2308,12 @@ ALTER TABLE `cargos`
 --
 ALTER TABLE `ciudades`
   ADD CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `dias_libres`
+--
+ALTER TABLE `dias_libres`
+  ADD CONSTRAINT `fk_dias_libres_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `direccion`

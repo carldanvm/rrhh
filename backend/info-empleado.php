@@ -17,27 +17,45 @@ if (!$empleadoId) {
     exit();
 }
 
-$sql = "SELECT usuarios.id, tipo_usuario, nombre, apellido, cedula, email, telefono, fecha_ingreso, cargos.cargo, cargos.area, cargos.salario_base, direccion.estado, direccion.municipio, direccion.parroquia, direccion.calle, direccion.zip, direccion.vivienda FROM `usuarios` LEFT JOIN cargos ON usuarios.id = cargos.usuario_id LEFT JOIN direccion ON usuarios.id = direccion.usuario_id WHERE usuarios.id = $empleadoId";
+$sql = "SELECT usuarios.id, tipo_usuario, nombre, apellido, cedula, email, telefono, fecha_ingreso, cargos.cargo, cargos.area, cargos.salario_base, direccion.estado, direccion.municipio, direccion.parroquia, direccion.calle, direccion.zip, direccion.vivienda FROM `usuarios` LEFT JOIN cargos ON usuarios.id = cargos.usuario_id LEFT JOIN direccion ON usuarios.id = direccion.usuario_id WHERE usuarios.id = ?";
 
 try{
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $empleadoId);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $empleado = $result->fetch_assoc();
+
+    if (!$empleado) {
+        echo json_encode(['error' => 'No se encontró el empleado.']);
+        exit();
+    }
 
     $estadoId = $empleado['estado'];
     $municipioId = $empleado['municipio'];
     $parroquiaId = $empleado['parroquia'];
 
-    $sql = "SELECT estado FROM estados WHERE id_estado = $estadoId";
-    $sql2 = "SELECT municipio FROM municipios WHERE id_municipio = $municipioId";
-    $sql3 = "SELECT parroquia FROM parroquias WHERE id_parroquia = $parroquiaId";
+    $sql = "SELECT estado FROM estados WHERE id_estado = ?";
+    $sql2 = "SELECT municipio FROM municipios WHERE id_municipio = ?";
+    $sql3 = "SELECT parroquia FROM parroquias WHERE id_parroquia = ?";
 
-    $result = $conn->query($sql);
-    $result2 = $conn->query($sql2);
-    $result3 = $conn->query($sql3);
-
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $estadoId);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $empleado['estado'] = $result->fetch_assoc()['estado'];
-    $empleado['municipio'] = $result2->fetch_assoc()['municipio'];
-    $empleado['parroquia'] = $result3->fetch_assoc()['parroquia'];
+
+    $stmt = $conn->prepare($sql2);
+    $stmt->bind_param("i", $municipioId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $empleado['municipio'] = $result->fetch_assoc()['municipio'];
+
+    $stmt = $conn->prepare($sql3);
+    $stmt->bind_param("i", $parroquiaId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $empleado['parroquia'] = $result->fetch_assoc()['parroquia'];
 
     echo json_encode($empleado);
 

@@ -83,7 +83,7 @@
         // Comparar con cada descriptor proporcionado
         foreach ($descriptores as $descriptor) {
             $distancia = calcularDistanciaEuclidiana($descriptor, $descriptorDB);
-            if ($distancia !== false && $distancia < 0.6) {
+            if ($distancia !== false && $distancia < 0.5) {
                 $usuarioEncontrado = true;
                 $usuarioId = $row['id'];
                 $usuarioNombre = $row['nombre'];

@@ -93,7 +93,7 @@ include "includes/header.php";
                                 Inasistencias
                             </th>
                             <th scope="col">
-                                Fecha de ingreso
+                                Fecha de registro
                             </th>
                         </tr>
                     </thead>
